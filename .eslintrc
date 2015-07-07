@@ -1,0 +1,14 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "strict": 0
+  },
+  "globals": {
+    "angular": false,
+    "pipe": false
+  }
+}
