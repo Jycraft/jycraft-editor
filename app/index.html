@@ -5,37 +5,16 @@
   <link rel="stylesheet" href="lib/externals.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body layout="column" ng-controller="AppCtrl as ctrl">
+<body layout="column">
 <md-toolbar layout="row">
   <div class="md-toolbar-tools">
     <h1 flex="20">Jycraft Codecraft</h1>
   </div>
 </md-toolbar>
-<div layout="row" layout-align="center center">
-  <md-content class="md-padding">
-    <form name="userForm">
-      <h1 class="md-display-3">Connect to Jycraft</h1>
-      <md-input-container flex>
-        <label for="host">Host</label>
-        <input id="host" ng-model="host">
-      </md-input-container>
-      <md-input-container flex>
-        <label for="port">Port</label>
-        <input id="port" ng-model="port">
-      </md-input-container>
-      <md-input-container flex>
-        <label for="password">Password</label>
-        <input id="password" ng-model="password">
-      </md-input-container>
-    </form>
-    <md-button ng-click="ctrl.connect(host, port, password)"
-               class="md-primary"> Connect
-    </md-button>
-  </md-content>
-</div>
 
+<div ng-view></div>
 
 <script src="lib/externals.js"></script>
-<script src="js/index.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
