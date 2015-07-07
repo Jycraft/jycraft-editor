@@ -1,22 +1,23 @@
 <div layout="row" layout-align="center center">
   <md-content class="md-padding">
     <h1 class="md-display-2">Connect to Jycraft</h1>
-    <form name="userForm">
+
+    <form name="userForm" ng-submit="ctrl.connect(host, port, password)">
       <md-input-container flex>
         <label for="host">Host</label>
-        <input id="host" ng-model="host">
+        <input id="host" ng-model="host" required>
       </md-input-container>
       <md-input-container flex>
         <label for="port">Port</label>
-        <input id="port" ng-model="port">
+        <input id="port" ng-model="port" required>
       </md-input-container>
       <md-input-container flex>
         <label for="password">Password</label>
-        <input id="password" ng-model="password">
+        <input id="password" ng-model="password" required>
       </md-input-container>
+      <md-button type="submit"
+                 class="md-primary"> Connect
     </form>
-    <md-button ng-click="ctrl.connect(host, port, password)"
-               class="md-primary"> Connect
     </md-button>
   </md-content>
 </div>

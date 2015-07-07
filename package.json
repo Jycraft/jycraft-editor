@@ -28,11 +28,14 @@
     "gulp-uglifyjs": "^0.6.2"
   },
   "dependencies": {
+    "ace-min-noconflict": "^1.1.9",
     "angular": "^1.4.0",
-    "angular-aria": "^1.4.0",
     "angular-animate": "^1.4.0",
-    "angular-route": "^1.4.0",
+    "angular-aria": "^1.4.0",
     "angular-material": "^0.10.0",
-    "angular-material-icons": "0.5.0"
+    "angular-material-icons": "0.5.0",
+    "angular-route": "^1.4.0",
+    "angular-ui-ace": "^0.2.3",
+    "install": "^0.1.8"
   }
 }

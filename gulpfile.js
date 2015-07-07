@@ -2,8 +2,6 @@ var gulp = require("gulp"),
     concat = require("gulp-concat"),
     sourcemaps = require("gulp-sourcemaps"),
     uglify = require("gulp-uglifyjs"),
-    cssmin = require("gulp-cssmin"),
-    extractor = require("gulp-extract-sourcemap"),
     livereload = require("gulp-livereload"),
     connect = require("gulp-connect");
 
@@ -14,7 +12,10 @@ var paths = {
         "node_modules/angular-aria/angular-aria.min.js",
         "node_modules/angular-material/angular-material.min.js",
         "node_modules/angular-route/angular-route.min.js",
-        "node_modules/angular-material-icons/angular-material-icons.min.js"
+        "node_modules/ace-min-noconflict/ace.js",
+        "node_modules/angular-ui-ace/src/ui-ace.js",
+        "node_modules/angular-material-icons/angular-material-icons.min.js",
+        "node_modules/ace-min-noconflict/mode-python.js"
     ],
     css: [
         "node_modules/angular-material/angular-material.min.css"
@@ -51,4 +52,5 @@ gulp.task("connect", function () {
     });
 });
 
-gulp.task("default", ["vendor-js", "vendor-css", "connect", "watch"]);
+gulp.task("default", ["vendor-js", "vendor-css",
+    "connect", "watch"]);

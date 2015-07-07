@@ -1,28 +1,3 @@
-function HomeCtrl ($location, connection) {
-    this.gotoConnect = function () {
-        $location.path('/connect');
-    }
-}
-
-function Connection() {
-    this.isConnected = false;
-    this.host = null;
-    this.port = null;
-    this.password = null;
-    this.connect = function (host, port, password) {
-
-    }
-}
-
-function ConnectCtrl($mdToast) {
-    this.connect = function (host, port, password) {
-        $mdToast.show($mdToast.simple().content('Hello!'));
-    }
-}
-
-function SessionCtrl() {
-
-}
 
 function ModuleConfig($routeProvider, $mdThemingProvider) {
 
@@ -38,7 +13,8 @@ function ModuleConfig($routeProvider, $mdThemingProvider) {
         when('/session', {
             templateUrl: 'partials/session.html',
             controller: 'SessionCtrl as ctrl',
-            requiresConnection: true
+            requiresConnection: false
+            //requiresConnection: true
         }).
         otherwise({
             redirectTo: '/home'
@@ -69,7 +45,8 @@ function ModuleRun($rootScope, $location, connection) {
     });
 }
 
-angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute'])
+angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute',
+    'ui.ace'])
     .config(ModuleConfig)
     .run(ModuleRun)
     .service('connection', Connection)
