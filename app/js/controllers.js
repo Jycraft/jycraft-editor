@@ -41,9 +41,11 @@ function ConnectCtrl($log, $scope, $mdToast, connection, $location) {
     )
 }
 
-function SessionCtrl($log, connection) {
+function SessionCtrl($log, $rootScope, connection) {
+    var ctrl = this;
     this.connection = connection;
-    this.codeSnippet = "x = 1 + 1";
+    this.codeSnippet = "print 1 + 1";
+    this.jqconsole = $('#console').jqconsole('Hi\n', '\n>>>');
     this.aceConfig = {
         useWrapMode: true,
         mode: "python",
@@ -54,6 +56,24 @@ function SessionCtrl($log, connection) {
     this.run = function (codeSnippet) {
         connection.send(codeSnippet);
     };
+
+    // Handle non-login websocket responses, meaning, EvalResponse
+    $rootScope.$on(
+        "EvalResponse",
+        function (event, response) {
+            ctrl.jqconsole.Write(response.replace('\r', ''), 'jqconsole-output');
+        });
+
+    var startPrompt = function () {
+        // Start the prompt with history enabled.
+        ctrl.jqconsole.Prompt(true, function (input) {
+            // Output input with the class jqconsole-output.
+            ctrl.jqconsole.Write(input + '\n', 'jqconsole-output');
+            // Restart the prompt.
+            startPrompt();
+        });
+    };
+    startPrompt();
 
     function aceLoaded(ace) {
         //ace.setOptions({basePath: "/lib"});

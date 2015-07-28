@@ -1,11 +1,10 @@
-function Connection($log, $websocket, $mdToast) {
+function Connection($log, $rootScope, $websocket, $mdToast) {
     var ctrl = this;
     this.isConnected = false;
     this.host = "localhost";
     this.port = "44445";
     this.password = "swordfish";
     this.dataStream = null;
-    this.responses = [];
     this.isConnected = false;
     this.loginFailed = false;
 
@@ -25,8 +24,7 @@ function Connection($log, $websocket, $mdToast) {
             } else {
                 ctrl.isConnected = true;
                 ctrl.loginFailed = false;
-                ctrl.responses.push(response);
-                $log.debug(response);
+                $rootScope.$broadcast("EvalResponse", response);
             }
         });
         ctrl.dataStream.onOpen(function () {
