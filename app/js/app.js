@@ -46,7 +46,7 @@ function ModuleRun($rootScope, $location, connection) {
 }
 
 angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute',
-    'ui.ace'])
+    'ui.ace', 'ngWebSocket'])
     .config(ModuleConfig)
     .run(ModuleRun)
     .service('connection', Connection)

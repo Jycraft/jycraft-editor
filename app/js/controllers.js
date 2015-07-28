@@ -1,36 +1,44 @@
 function HomeCtrl($location, connection) {
-    var ctrl = this;
     this.connection = connection;
     this.goto = function (route) {
         $location.path(route);
     };
 }
 
-function Connection() {
-    this.isConnected = false;
-    this.host = null;
-    this.port = null;
-    this.password = null;
+function ConnectCtrl($log, $scope, $mdToast, connection, $location) {
+    // Set some defaults
+    this.host = 'localhost';
+    this.port = 44445;
+    this.password = 'swordfish';
     this.connect = function (host, port, password) {
-        if (password == '123') {
-            this.isConnected = true;
-            return false;
-        } else {
-            return 'Bad Password';
-        }
-    }
-}
+        connection.connect(host, port, password);
+    };
 
-function ConnectCtrl($mdToast, connection, $location) {
-    this.connect = function (host, port, password) {
-        var err = connection.connect(host, port, password);
-        if (err == false) {
-            $mdToast.show($mdToast.simple().content('You are connected'));
-            $location.path('/session')
-        } else {
-            $mdToast.show($mdToast.simple().content('Error: ' + err));
+    // Handle a good connection
+    $scope.$watch(
+        function () {
+            return connection.isConnected;
+        },
+        function () {
+            if (connection.isConnected) {
+                // Navigate away, we're connected
+                $mdToast.show($mdToast.simple().content('You are connected'));
+                $location.path('/session');
+            }
         }
-    }
+    );
+
+    // Handle connection error
+    $scope.$watch(
+        function () {
+            return connection.loginFailed;
+        },
+        function () {
+            if (connection.loginFailed) {
+                $mdToast.show($mdToast.simple().content('Error: ' + err));
+            }
+        }
+    )
 }
 
 function SessionCtrl() {
@@ -43,9 +51,10 @@ function SessionCtrl() {
     };
     function aceLoaded(ace) {
         //ace.setOptions({basePath: '/lib'});
-        console.debug('ace was loaded ###');
-    };
+        //console.debug('ace was loaded ###');
+    }
+
     function aceChanged() {
         console.debug('ace was changed');
-    };
+    }
 }

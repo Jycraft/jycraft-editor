@@ -15,7 +15,8 @@ var paths = {
         "node_modules/ace-min-noconflict/ace.js",
         "node_modules/angular-ui-ace/src/ui-ace.js",
         "node_modules/angular-material-icons/angular-material-icons.min.js",
-        "node_modules/ace-min-noconflict/mode-python.js"
+        "node_modules/ace-min-noconflict/mode-python.js",
+        "node_modules/angular-websocket/dist/angular-websocket.min.js"
     ],
     css: [
         "node_modules/angular-material/angular-material.min.css"

@@ -1006,3 +1006,131 @@ b+'"><g id="'+a+'" style="display:none">'+e[a]+'</g><g id="'+c+'" style="display
 a&&(c=a[1],b=a[2])}else c="help";void 0===e[c]&&(c="help");void 0!==d.size?b=d.size:null!==b&&(b=24);f.html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="'+b+'" height="'+b+'">'+e[c]+"</svg>")})();void 0!==d.icon&&d.$observe("icon",g);void 0!==d.size&&d.$observe("size",h)}}});
 
 ace.define("ace/mode/python_highlight_rules",["require","exports","module","ace/lib/oop","ace/mode/text_highlight_rules"],function(e,t,n){"use strict";var r=e("../lib/oop"),i=e("./text_highlight_rules").TextHighlightRules,s=function(){var e="and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|with|yield",t="True|False|None|NotImplemented|Ellipsis|__debug__",n="abs|divmod|input|open|staticmethod|all|enumerate|int|ord|str|any|eval|isinstance|pow|sum|basestring|execfile|issubclass|print|super|binfile|iter|property|tuple|bool|filter|len|range|type|bytearray|float|list|raw_input|unichr|callable|format|locals|reduce|unicode|chr|frozenset|long|reload|vars|classmethod|getattr|map|repr|xrange|cmp|globals|max|reversed|zip|compile|hasattr|memoryview|round|__import__|complex|hash|min|set|apply|delattr|help|next|setattr|buffer|dict|hex|object|slice|coerce|dir|id|oct|sorted|intern",r=this.createKeywordMapper({"invalid.deprecated":"debugger","support.function":n,"constant.language":t,keyword:e},"identifier"),i="(?:r|u|ur|R|U|UR|Ur|uR)?",s="(?:(?:[1-9]\\d*)|(?:0))",o="(?:0[oO]?[0-7]+)",u="(?:0[xX][\\dA-Fa-f]+)",a="(?:0[bB][01]+)",f="(?:"+s+"|"+o+"|"+u+"|"+a+")",l="(?:[eE][+-]?\\d+)",c="(?:\\.\\d+)",h="(?:\\d+)",p="(?:(?:"+h+"?"+c+")|(?:"+h+"\\.))",d="(?:(?:"+p+"|"+h+")"+l+")",v="(?:"+d+"|"+p+")",m="\\\\(x[0-9A-Fa-f]{2}|[0-7]{3}|[\\\\abfnrtv'\"]|U[0-9A-Fa-f]{8}|u[0-9A-Fa-f]{4})";this.$rules={start:[{token:"comment",regex:"#.*$"},{token:"string",regex:i+'"{3}',next:"qqstring3"},{token:"string",regex:i+'"(?=.)',next:"qqstring"},{token:"string",regex:i+"'{3}",next:"qstring3"},{token:"string",regex:i+"'(?=.)",next:"qstring"},{token:"constant.numeric",regex:"(?:"+v+"|\\d+)[jJ]\\b"},{token:"constant.numeric",regex:v},{token:"constant.numeric",regex:f+"[lL]\\b"},{token:"constant.numeric",regex:f+"\\b"},{token:r,regex:"[a-zA-Z_$][a-zA-Z0-9_$]*\\b"},{token:"keyword.operator",regex:"\\+|\\-|\\*|\\*\\*|\\/|\\/\\/|%|<<|>>|&|\\||\\^|~|<|>|<=|=>|==|!=|<>|="},{token:"paren.lparen",regex:"[\\[\\(\\{]"},{token:"paren.rparen",regex:"[\\]\\)\\}]"},{token:"text",regex:"\\s+"}],qqstring3:[{token:"constant.language.escape",regex:m},{token:"string",regex:'"{3}',next:"start"},{defaultToken:"string"}],qstring3:[{token:"constant.language.escape",regex:m},{token:"string",regex:"'{3}",next:"start"},{defaultToken:"string"}],qqstring:[{token:"constant.language.escape",regex:m},{token:"string",regex:"\\\\$",next:"qqstring"},{token:"string",regex:'"|$',next:"start"},{defaultToken:"string"}],qstring:[{token:"constant.language.escape",regex:m},{token:"string",regex:"\\\\$",next:"qstring"},{token:"string",regex:"'|$",next:"start"},{defaultToken:"string"}]}};r.inherits(s,i),t.PythonHighlightRules=s}),ace.define("ace/mode/folding/pythonic",["require","exports","module","ace/lib/oop","ace/mode/folding/fold_mode"],function(e,t,n){"use strict";var r=e("../../lib/oop"),i=e("./fold_mode").FoldMode,s=t.FoldMode=function(e){this.foldingStartMarker=new RegExp("([\\[{])(?:\\s*)$|("+e+")(?:\\s*)(?:#.*)?$")};r.inherits(s,i),function(){this.getFoldWidgetRange=function(e,t,n){var r=e.getLine(n),i=r.match(this.foldingStartMarker);if(i)return i[1]?this.openingBracketBlock(e,i[1],n,i.index):i[2]?this.indentationBlock(e,n,i.index+i[2].length):this.indentationBlock(e,n)}}.call(s.prototype)}),ace.define("ace/mode/python",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/python_highlight_rules","ace/mode/folding/pythonic","ace/range"],function(e,t,n){"use strict";var r=e("../lib/oop"),i=e("./text").Mode,s=e("./python_highlight_rules").PythonHighlightRules,o=e("./folding/pythonic").FoldMode,u=e("../range").Range,a=function(){this.HighlightRules=s,this.foldingRules=new o("\\:")};r.inherits(a,i),function(){this.lineCommentStart="#",this.getNextLineIndent=function(e,t,n){var r=this.$getIndent(t),i=this.getTokenizer().getLineTokens(t,e),s=i.tokens;if(s.length&&s[s.length-1].type=="comment")return r;if(e=="start"){var o=t.match(/^.*[\{\(\[\:]\s*$/);o&&(r+=n)}return r};var e={pass:1,"return":1,raise:1,"break":1,"continue":1};this.checkOutdent=function(t,n,r){if(r!=="\r\n"&&r!=="\r"&&r!=="\n")return!1;var i=this.getTokenizer().getLineTokens(n.trim(),t).tokens;if(!i)return!1;do var s=i.pop();while(s&&(s.type=="comment"||s.type=="text"&&s.value.match(/^\s+$/)));return s?s.type=="keyword"&&e[s.value]:!1},this.autoOutdent=function(e,t,n){n+=1;var r=this.$getIndent(t.getLine(n)),i=t.getTabString();r.slice(-i.length)==i&&t.remove(new u(n,r.length-i.length,n,r.length))},this.$id="ace/mode/python"}.call(a.prototype),t.Mode=a})
+!function(){"use strict";function e(e,t,o,p){function f(t,o,s){s||!c(o)||l(o)||(s=o,o=void 0),this.protocols=o,this.url=t||"Missing URL",this.ssl=/(wss)/i.test(this.url),this.scope=s&&s.scope||e,this.rootScopeFailover=s&&s.rootScopeFailover&&!0,this.useApplyAsync=s&&s.useApplyAsync||!1,this.initialTimeout=s&&s.initialTimeout||500,this.maxTimeout=s&&s.maxTimeout||3e5,this.reconnectIfNotNormalClose=s&&s.reconnectIfNotNormalClose||!1,this._reconnectAttempts=0,this.sendQueue=[],this.onOpenCallbacks=[],this.onMessageCallbacks=[],this.onErrorCallbacks=[],this.onCloseCallbacks=[],n(this._readyStateConstants),t?this._connect():this._setInternalState(0)}return f.prototype._readyStateConstants={CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3,RECONNECT_ABORTED:4},f.prototype._normalCloseCode=1e3,f.prototype._reconnectableStatusCodes=[4e3],f.prototype.safeDigest=function(e){e&&!this.scope.$$phase&&this.scope.$digest()},f.prototype.bindToScope=function(t){var o=this;return t&&(this.scope=t,this.rootScopeFailover&&this.scope.$on("$destroy",function(){o.scope=e})),o},f.prototype._connect=function(e){(e||!this.socket||this.socket.readyState!==this._readyStateConstants.OPEN)&&(this.socket=p.create(this.url,this.protocols),this.socket.onmessage=angular.bind(this,this._onMessageHandler),this.socket.onopen=angular.bind(this,this._onOpenHandler),this.socket.onerror=angular.bind(this,this._onErrorHandler),this.socket.onclose=angular.bind(this,this._onCloseHandler))},f.prototype.fireQueue=function(){for(;this.sendQueue.length&&this.socket.readyState===this._readyStateConstants.OPEN;){var e=this.sendQueue.shift();this.socket.send(r(e.message)?e.message:JSON.stringify(e.message)),e.deferred.resolve()}},f.prototype.notifyOpenCallbacks=function(e){for(var t=0;t<this.onOpenCallbacks.length;t++)this.onOpenCallbacks[t].call(this,e)},f.prototype.notifyCloseCallbacks=function(e){for(var t=0;t<this.onCloseCallbacks.length;t++)this.onCloseCallbacks[t].call(this,e)},f.prototype.notifyErrorCallbacks=function(e){for(var t=0;t<this.onErrorCallbacks.length;t++)this.onErrorCallbacks[t].call(this,e)},f.prototype.onOpen=function(e){return this.onOpenCallbacks.push(e),this},f.prototype.onClose=function(e){return this.onCloseCallbacks.push(e),this},f.prototype.onError=function(e){return this.onErrorCallbacks.push(e),this},f.prototype.onMessage=function(e,t){if(!i(e))throw new Error("Callback must be a function");if(t&&a(t.filter)&&!r(t.filter)&&!(t.filter instanceof RegExp))throw new Error("Pattern must be a string or regular expression");return this.onMessageCallbacks.push({fn:e,pattern:t?t.filter:void 0,autoApply:t?t.autoApply:!0}),this},f.prototype._onOpenHandler=function(e){this._reconnectAttempts=0,this.notifyOpenCallbacks(e),this.fireQueue()},f.prototype._onCloseHandler=function(e){this.notifyCloseCallbacks(e),(this.reconnectIfNotNormalClose&&e.code!==this._normalCloseCode||this._reconnectableStatusCodes.indexOf(e.code)>-1)&&this.reconnect()},f.prototype._onErrorHandler=function(e){this.notifyErrorCallbacks(e)},f.prototype._onMessageHandler=function(e){function t(e,t,o){o=h.call(arguments,2),s.useApplyAsync?s.scope.$applyAsync(function(){e.apply(s,o)}):(e.apply(s,o),s.safeDigest(t))}for(var o,n,s=this,i=0;i<s.onMessageCallbacks.length;i++)n=s.onMessageCallbacks[i],o=n.pattern,o?r(o)&&e.data===o?t(n.fn,n.autoApply,e):o instanceof RegExp&&o.exec(e.data)&&t(n.fn,n.autoApply,e):t(n.fn,n.autoApply,e)},f.prototype.close=function(e){return(e||!this.socket.bufferedAmount)&&this.socket.close(),this},f.prototype.send=function(e){function o(e){e.cancel=n;var t=e.then;return e.then=function(){var e=t.apply(this,arguments);return o(e)},e}function n(t){return r.sendQueue.splice(r.sendQueue.indexOf(e),1),s.reject(t),r}var s=t.defer(),r=this,i=o(s.promise);return r.readyState===r._readyStateConstants.RECONNECT_ABORTED?s.reject("Socket connection has been closed"):(r.sendQueue.push({message:e,deferred:s}),r.fireQueue()),p.isMocked&&p.isMocked()&&p.isConnected(this.url)&&this._onMessageHandler(p.mockSend()),i},f.prototype.reconnect=function(){this.close();var e=this._getBackoffDelay(++this._reconnectAttempts),t=e/1e3;return console.log("Reconnecting in "+t+" seconds"),o(angular.bind(this,this._connect),e),this},f.prototype._getBackoffDelay=function(e){var t=Math.random()+1,o=this.initialTimeout,n=2,s=e,r=this.maxTimeout;return Math.floor(Math.min(t*o*Math.pow(n,s),r))},f.prototype._setInternalState=function(e){if(Math.floor(e)!==e||0>e||e>4)throw new Error("state must be an integer between 0 and 4, got: "+e);s||(this.readyState=e||this.socket.readyState),this._internalConnectionState=e,u(this.sendQueue,function(e){e.deferred.reject("Message cancelled due to closed socket connection")})},s&&s(f.prototype,"readyState",{get:function(){return this._internalConnectionState||this.socket.readyState},set:function(){throw new Error("The readyState property is read-only")}}),function(e,t,o){return new f(e,t,o)}}function t(e,t){this.create=function(t,o){var n,s,r=/wss?:\/\//.exec(t);if(!r)throw new Error("Invalid url provided");if("object"==typeof exports&&require)try{s=require("ws"),n=s.Client||s.client||s}catch(i){}return n=n||e.WebSocket||e.MozWebSocket,o?new n(t,o):new n(t)},this.createWebSocketBackend=function(e,o){return t.warn("Deprecated: Please use .create(url, protocols)"),this.create(e,o)}}var o=angular.noop,n=Object.freeze?Object.freeze:o,s=Object.defineProperty,r=angular.isString,i=angular.isFunction,a=angular.isDefined,c=angular.isObject,l=angular.isArray,u=angular.forEach,h=Array.prototype.slice;Array.prototype.indexOf||(Array.prototype.indexOf=function(e){var t=this.length>>>0,o=Number(arguments[1])||0;for(o=0>o?Math.ceil(o):Math.floor(o),0>o&&(o+=t);t>o;o++)if(o in this&&this[o]===e)return o;return-1}),angular.module("ngWebSocket",[]).factory("$websocket",["$rootScope","$q","$timeout","$websocketBackend",e]).factory("WebSocket",["$rootScope","$q","$timeout","WebsocketBackend",e]).service("$websocketBackend",["$window","$log",t]).service("WebSocketBackend",["$window","$log",t]),angular.module("angular-websocket",["ngWebSocket"]),"object"==typeof module&&"function"!=typeof define&&(module.exports=angular.module("ngWebSocket"))}();
+//# sourceMappingURL=angular-websocket.min.js.map
+(function() {
+  'use strict';
+
+  function $WebSocketBackend() {
+    var connectQueue = [];
+    var pendingConnects = [];
+    var closeQueue = [];
+    var pendingCloses = [];
+    var sendQueue = [];
+    var pendingSends = [];
+    var mock = false;
+
+
+    function $MockWebSocket(url, protocols) {
+      this.protocols = protocols;
+      this.ssl = /(wss)/i.test(this.url);
+
+    }
+
+    $MockWebSocket.prototype.send = function (msg) {
+      pendingSends.push(msg);
+    };
+
+    this.mockSend = function() {
+      if (mock) {
+        return sendQueue.shift();
+      }
+    };
+
+    this.mock = function() {
+      mock = true;
+    };
+
+    this.isMocked = function () {
+        return mock;
+    };
+
+    this.isConnected = function(url) {
+        return connectQueue.indexOf(url) > -1;
+    };
+
+    $MockWebSocket.prototype.close = function () {
+      pendingCloses.push(true);
+    };
+
+    function createWebSocketBackend(url, protocols) {
+      pendingConnects.push(url);
+      // pendingConnects.push({
+      //   url: url,
+      //   protocols: protocols
+      // });
+
+      if (protocols) {
+        return new $MockWebSocket(url, protocols);
+      }
+      return new $MockWebSocket(url);
+    }
+    this.create = createWebSocketBackend;
+    this.createWebSocketBackend = createWebSocketBackend;
+
+    this.flush = function () {
+      var url, msg, config;
+      while (url = pendingConnects.shift()) {
+        var i = connectQueue.indexOf(url);
+        if (i > -1) {
+          connectQueue.splice(i, 1);
+        }
+        // if (config && config.url) {
+        // }
+      }
+
+      while (pendingCloses.shift()) {
+        closeQueue.shift();
+      }
+
+      while (msg = pendingSends.shift()) {
+        var j;
+        sendQueue.forEach(function(pending, i) {
+          if (pending.message === msg.message) {
+            j = i;
+          }
+        });
+
+        if (j > -1) {
+          sendQueue.splice(j, 1);
+        }
+      }
+    };
+
+    this.expectConnect = function (url, protocols) {
+      connectQueue.push(url);
+      // connectQueue.push({url: url, protocols: protocols});
+    };
+
+    this.expectClose = function () {
+      closeQueue.push(true);
+    };
+
+    this.expectSend = function (msg) {
+      sendQueue.push(msg);
+    };
+
+    this.verifyNoOutstandingExpectation = function () {
+      if (connectQueue.length || closeQueue.length || sendQueue.length) {
+        throw new Error('Requests waiting to be flushed');
+      }
+    };
+
+    this.verifyNoOutstandingRequest = function () {
+      if (pendingConnects.length || pendingCloses.length || pendingSends.length) {
+        throw new Error('Requests waiting to be processed');
+      }
+    };
+
+  } // end $WebSocketBackend
+
+  angular.module('ngWebSocketMock', [])
+  .service('WebSocketBackend',  $WebSocketBackend)
+  .service('$websocketBackend', $WebSocketBackend);
+
+  angular.module('angular-websocket-mock', ['ngWebSocketMock']);
+
+  if (typeof module === 'object' && typeof define !== 'function') {
+    module.exports = angular.module('ngWebSocketMock');
+  }
+}());
