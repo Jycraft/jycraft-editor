@@ -26,6 +26,7 @@ function Connection($log, $websocket, $mdToast) {
                 ctrl.isConnected = true;
                 ctrl.loginFailed = false;
                 ctrl.responses.push(response);
+                $log.debug(response);
             }
         });
         ctrl.dataStream.onOpen(function () {
@@ -38,5 +39,10 @@ function Connection($log, $websocket, $mdToast) {
         ctrl.dataStream.onError(function () {
             $mdToast.show($mdToast.simple().content("Error occurred"));
         });
-    }
+    };
+
+    this.send = function (codeSnippet) {
+        ctrl.dataStream.send(codeSnippet);
+    };
+
 }

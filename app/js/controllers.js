@@ -41,7 +41,8 @@ function ConnectCtrl($log, $scope, $mdToast, connection, $location) {
     )
 }
 
-function SessionCtrl() {
+function SessionCtrl($log, connection) {
+    this.connection = connection;
     this.codeSnippet = "x = 1 + 1";
     this.aceConfig = {
         useWrapMode: true,
@@ -49,6 +50,11 @@ function SessionCtrl() {
         onLoad: aceLoaded,
         onChange: aceChanged
     };
+
+    this.run = function (codeSnippet) {
+        connection.send(codeSnippet);
+    };
+
     function aceLoaded(ace) {
         //ace.setOptions({basePath: "/lib"});
         //console.debug("ace was loaded ###");

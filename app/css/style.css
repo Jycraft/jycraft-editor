@@ -38,16 +38,3 @@ md-toolbar:not(.md-hue-1),
 .md-fab {
     fill: #fff;
 }
-
-md-sidenav {
-    fill: #737373;
-}
-
-md-sidenav ng-md-icon {
-    position: relative;
-    top: 5px;
-}
-
-.user-avatar {
-    border-radius: 99%;
-}
