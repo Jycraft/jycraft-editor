@@ -1,4 +1,4 @@
-function Connection($log, $websocket) {
+function Connection($log, $websocket, $mdToast) {
     var ctrl = this;
     this.isConnected = false;
     this.host = "localhost";
@@ -30,6 +30,13 @@ function Connection($log, $websocket) {
         });
         ctrl.dataStream.onOpen(function () {
             ctrl.dataStream.send("login!" + ctrl.password);
+        });
+        ctrl.dataStream.onClose(function () {
+            ctrl.isConnected = false;
+            $mdToast.show($mdToast.simple().content("Connection closed"));
+        });
+        ctrl.dataStream.onError(function () {
+            $mdToast.show($mdToast.simple().content("Error occurred"));
         });
     }
 }
