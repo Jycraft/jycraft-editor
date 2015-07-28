@@ -1,15 +1,13 @@
 function Connection($log, $rootScope, $websocket, $mdToast) {
     var ctrl = this;
     this.isConnected = false;
-    this.host = "localhost";
-    this.port = "44445";
-    this.password = "swordfish";
     this.dataStream = null;
     this.isConnected = false;
     this.loginFailed = false;
 
-    this.connect = function () {
-        ctrl.dataStream = $websocket('ws://' + ctrl.host + ':' + ctrl.port);
+    this.connect = function (host, port, password) {
+        $log.debug('connecting', host);
+        ctrl.dataStream = $websocket('ws://' + host + ':' + port);
         ctrl.dataStream.onMessage(function (message) {
             var response = message.data;
 
@@ -28,19 +26,24 @@ function Connection($log, $rootScope, $websocket, $mdToast) {
             }
         });
         ctrl.dataStream.onOpen(function () {
-            ctrl.dataStream.send("login!" + ctrl.password);
+            ctrl.dataStream.send("login!" + password);
         });
         ctrl.dataStream.onClose(function () {
             ctrl.isConnected = false;
             $mdToast.show($mdToast.simple().content("Connection closed"));
         });
-        ctrl.dataStream.onError(function () {
+        ctrl.dataStream.onError(function (event) {
             $mdToast.show($mdToast.simple().content("Error occurred"));
+            $log.debug("Error", event);
         });
     };
 
     this.send = function (codeSnippet) {
-        ctrl.dataStream.send(codeSnippet);
+        if (this.dataStream == null) {
+            $mdToast.show($mdToast.simple().content("Not connected"));
+        } else {
+            ctrl.dataStream.send(codeSnippet);
+        }
     };
 
 }

@@ -3,7 +3,7 @@
     <h1 class="md-display-2">Connect to Jycraft</h1>
 
     <form name="userForm"
-          ng-submit="ctrl.connect()">
+          ng-submit="ctrl.connect(ctrl.host, ctrl.port, ctrl.password)">
       <md-input-container flex>
         <label for="host">Host</label>
         <input id="host" ng-model="ctrl.host" required>

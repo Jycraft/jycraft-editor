@@ -44,8 +44,8 @@ function ConnectCtrl($log, $scope, $mdToast, connection, $location) {
 function SessionCtrl($log, $rootScope, connection) {
     var ctrl = this;
     this.connection = connection;
-    this.codeSnippet = "print 1 + 1";
-    this.jqconsole = $('#console').jqconsole('Hi\n', '\n>>>');
+    this.codeSnippet = 'from mcapi import *\nyell("HOWDY")';
+    this.jqconsole = $("#console").jqconsole("Hi\n", "\n>>>");
     this.aceConfig = {
         useWrapMode: true,
         mode: "python",
@@ -53,31 +53,40 @@ function SessionCtrl($log, $rootScope, connection) {
         onChange: aceChanged
     };
 
-    this.run = function (codeSnippet) {
-        connection.send(codeSnippet);
+    this.run = function () {
+        connection.send(ctrl.codeSnippet);
     };
 
     // Handle non-login websocket responses, meaning, EvalResponse
     $rootScope.$on(
         "EvalResponse",
         function (event, response) {
-            ctrl.jqconsole.Write(response.replace('\r', ''), 'jqconsole-output');
+            ctrl.jqconsole.Write(response.replace("\r", ""), "jqconsole-output");
         });
 
     var startPrompt = function () {
         // Start the prompt with history enabled.
         ctrl.jqconsole.Prompt(true, function (input) {
             // Output input with the class jqconsole-output.
-            ctrl.jqconsole.Write(input + '\n', 'jqconsole-output');
+            ctrl.jqconsole.Write(input + "\n", "jqconsole-output");
             // Restart the prompt.
             startPrompt();
         });
     };
     startPrompt();
 
-    function aceLoaded(ace) {
-        //ace.setOptions({basePath: "/lib"});
-        //console.debug("ace was loaded ###");
+    function aceLoaded(_editor) {
+        _editor.commands.addCommand({
+            name: "Execute",
+            bindKey: {
+                mac: "Command-Shift-Up",
+                win: "Alt-Shift-Up",
+
+            },
+            exec: function () {
+                ctrl.run(ctrl.snippet);
+            }
+        });
     }
 
     function aceChanged() {
