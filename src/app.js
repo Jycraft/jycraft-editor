@@ -13,4 +13,5 @@ import sessions from "./features/sessions";
 
 angular.module("app", [ngMaterial, "ngMdIcons", uirouter,
     root, home, sessions])
-    .config(routing);
+    .config(routing)
+    .config(theming);

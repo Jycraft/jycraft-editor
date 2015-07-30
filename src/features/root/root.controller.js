@@ -1,5 +1,6 @@
 export default class Controller {
-    constructor($log) {
-        $log.debug("in 2323")
+    constructor($log, connection) {
+        this.$log = $log;
+        this.connection = connection;
     }
 }
