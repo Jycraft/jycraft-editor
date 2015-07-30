@@ -1,6 +1,4 @@
-export default function routing($urlRouterProvider, $mdThemingProvider) {
-    $urlRouterProvider.otherwise("/");
-
+export default function theming($mdThemingProvider) {
     var customBlueMap = $mdThemingProvider.extendPalette("light-blue", {
         "contrastDefaultColor": "light",
         "contrastDarkColors": ["50"],
@@ -13,5 +11,4 @@ export default function routing($urlRouterProvider, $mdThemingProvider) {
             "hue-1": "50"
         })
         .accentPalette("pink");
-
 }

@@ -6,7 +6,8 @@ import ngMaterial from "angular-material";
 import uirouter from "angular-ui-router";
 import "angular-material-icons";
 
-import routing from "./app.config";
+import routing from "./app.routing";
+import theming from "./app.theming";
 import home from "./features/home";
 import sessions from "./features/sessions";
 
