@@ -42,7 +42,7 @@ md-toolbar:not(.md-hue-1),
 /* The console container element */
 #console {
     position: absolute;
-    width: 350px;
+    width: 420px;
     height: 300px;
     background-color: black;
 }
