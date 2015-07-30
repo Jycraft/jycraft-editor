@@ -1,14 +1,14 @@
 {
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0
+  },
   "env": {
     "browser": true,
     "node": true,
     "mocha": true
   },
-  "rules": {
-    "strict": 0
-  },
   "globals": {
-    "angular": false,
-    "pipe": false
+    "angular": false
   }
 }
