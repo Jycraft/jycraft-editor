@@ -12,6 +12,7 @@ export default function routes($stateProvider) {
             url: "/session",
             template: require("./session.html"),
             controller: require("./session.controller"),
-            controllerAs: "ctrl"
+            controllerAs: "ctrl",
+            requiresConnection: true
         });
 }

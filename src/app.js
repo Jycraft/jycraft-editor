@@ -5,7 +5,8 @@ import ngMaterial from "angular-material";
 import uirouter from "angular-ui-router";
 import "angular-material-icons";
 
-import routing from "./app.routing";
+import {routeConfig} from "./app.routing";
+import {routeRun} from "./app.routing";
 import theming from "./app.theming";
 import root from "./features/root";
 import home from "./features/home";
@@ -13,5 +14,6 @@ import sessions from "./features/sessions";
 
 angular.module("app", [ngMaterial, "ngMdIcons", uirouter,
     root, home, sessions])
-    .config(routing)
-    .config(theming);
+    .config(routeConfig)
+    .config(theming)
+    .run(routeRun);

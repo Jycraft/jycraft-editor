@@ -2,11 +2,12 @@ import $ from "jquery";
 require("../../vendor/jqconsole");
 
 export default class Controller {
-    constructor($log, $rootScope, connection) {
+    constructor($log, $rootScope, connection, $mdToast) {
         var ctrl = this;
         this.$log = $log;
         this.$rootScope = $rootScope;
         this.connection = connection;
+        this.$mdToast = $mdToast;
         this.codeSnippet = "from mcapi import *\nyell('HOWDY')";
         this.jqconsole = $("#console").jqconsole("Hi\n", "\n>>>");
 
@@ -56,6 +57,11 @@ export default class Controller {
     }
 
     run() {
+        // Make sure we are still connected
+        if (!this.connection.isConnected) {
+            let msg = "Lost the connection";
+            $mdToast.show($mdToast.simple().content(msg));
+        }
         this.connection.send(this.codeSnippet);
     }
 }
