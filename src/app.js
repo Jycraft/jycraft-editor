@@ -1,5 +1,4 @@
 import "angular-material/angular-material.css";
-import "./app.css";
 
 import angular from "angular";
 import ngMaterial from "angular-material";
@@ -8,9 +7,10 @@ import "angular-material-icons";
 
 import routing from "./app.routing";
 import theming from "./app.theming";
+import root from "./features/root";
 import home from "./features/home";
 import sessions from "./features/sessions";
 
 angular.module("app", [ngMaterial, "ngMdIcons", uirouter,
-    home, sessions])
+    root, home, sessions])
     .config(routing);

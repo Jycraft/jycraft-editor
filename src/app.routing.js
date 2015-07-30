@@ -1,8 +1,3 @@
-export default function routing($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('root', {
-            abstract: true,
-            template: "<ui-view/>"
-        }
-    );
+export default function routing($urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
 }

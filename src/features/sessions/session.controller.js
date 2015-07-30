@@ -1,7 +1,7 @@
 import $ from "jquery";
 require("../../vendor/jqconsole");
 
-export default class SessionController {
+export default class Controller {
     constructor($log, $rootScope, connection) {
         var ctrl = this;
         this.$log = $log;

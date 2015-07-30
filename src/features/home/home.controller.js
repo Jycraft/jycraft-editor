@@ -1,6 +1,4 @@
-export default class HomeController {
+export default class Controller {
     constructor() {
     }
 }
-
-HomeController.$inject = [];
