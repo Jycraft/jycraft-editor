@@ -1,5 +1,10 @@
-0.0.1
-=====
+= Changelog
+
+== Unreleased
+
+- Check in the generated ``npm run build`` results in public
+
+== 0.0.1
 
 - Switch to ES6/webpack
 
