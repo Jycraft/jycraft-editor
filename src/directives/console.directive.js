@@ -3,29 +3,17 @@ import $ from "jQuery";
 
 function GreetingController() {
     var ctrl = this;
-    function aceLoaded(_editor) {
-        _editor.commands.addCommand({
-            name: "Execute",
-            bindKey: {
-                mac: "Command-Shift-Up",
-                win: "Alt-Shift-Up"
-            },
-            exec: function () {
-                ctrl.run(ctrl.codeSnippet);
-            }
+    this.jqconsole = $("#console").jqconsole("Hi\n", "\n>>>");
+    var startPrompt = function () {
+        // Start the prompt with history enabled.
+        ctrl.jqconsole["Prompt"](true, function (input) {
+            // Output input with the class jqconsole-output.
+            ctrl.jqconsole["Write"](input + "\n", "jqconsole-output");
+            // Restart the prompt.
+            startPrompt();
         });
-    }
-
-    function aceChanged() {
-        //console.debug("ace was changed");
-    }
-
-    this.aceConfig = {
-        useWrapMode: true,
-        mode: "python",
-        onLoad: aceLoaded,
-        onChange: aceChanged
     };
+    startPrompt();
 }
 
 function GreetingLink($scope, element) {
@@ -38,9 +26,8 @@ function greeting() {
         restrict: "E",
         scope: {},
         bindToController: {
-            codeSnippet: "=ngModel"
         },
-        template: "<code>{{codeSnippet}}</code>",
+        template: '<div id="console"></div>',
         controller: GreetingController,
         controllerAs: "ctrl",
         link: GreetingLink
