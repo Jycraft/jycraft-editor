@@ -50,7 +50,9 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.4.1",
+    "babel": "^5.8.19",
     "babel-eslint": "^4.0.5",
+    "chai": "^3.2.0",
     "eslint": "^0.24.1",
     "isparta-instrumenter-loader": "^0.2.1",
     "jasmine-core": "^2.3.4",
@@ -61,6 +63,7 @@
     "karma-sourcemap-loader": "^0.3.5",
     "karma-spec-reporter": "0.0.20",
     "karma-webpack": "^1.5.1",
+    "mocha-babel": "^3.0.0",
     "ng-annotate-webpack-plugin": "^0.1.2",
     "null-loader": "^0.1.1",
     "phantomjs": "^1.9.17"
