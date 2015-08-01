@@ -8,8 +8,8 @@
     "dev": "node node_modules/.bin/webpack-dev-server --history-api-fallback --hot --inline --progress",
     "test:midway": "karma start",
     "test:midway:live": "karma start --auto-watch --no-single-run",
-    "test:unit": "mocha --compilers js:mocha-babel tests/*.specs.js",
-    "test": "mocha --compilers js:mocha-babel tests/*.specs.js"
+    "test:unit": "mocha --compilers js:mocha-babel src/**/*.specs.js",
+    "test": "mocha --compilers js:mocha-babel src/**/*.specs.js"
   },
   "repository": {
     "type": "git",

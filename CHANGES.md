@@ -8,6 +8,10 @@
 
 - Hook up to travis
 
+* Change strategy for exporting services
+
+* Rename greeting directive
+
 == 0.0.1
 
 - Switch to ES6/webpack

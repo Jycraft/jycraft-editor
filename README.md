@@ -5,7 +5,14 @@ Web-based coding, sharing, and distribution environment for Jycraft
 
 ## Usage
 
-- Serve the code at ``dist`` at the root of a webserver
+- Serve the code at ``public`` at the root of a webserver
+
+- For example:
+
+```
+$ cd public
+$ python -m SimpleHTTPServer
+```
 
 ## Development
 
