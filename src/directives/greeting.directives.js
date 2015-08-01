@@ -1,31 +1,30 @@
 import angular from "angular";
+import $ from "jquery";
+require("../vendor/jqconsole");
 
-function GreetingController() {
+function GreetingController($rootScope) {
     var ctrl = this;
-    this.run();
-    function aceLoaded(_editor) {
-        _editor.commands.addCommand({
-            name: "Execute",
-            bindKey: {
-                mac: "Command-Shift-Up",
-                win: "Alt-Shift-Up"
-            },
-            exec: function () {
-                ctrl.run(ctrl.codeSnippet);
-            }
+    // Handle non-login websocket responses, meaning, EvalResponse
+    $rootScope.$on(
+        "EvalResponse",
+        function (event, response) {
+            ctrl.jqconsole['Write'](
+                response.replace("\r", ""), "jqconsole-output");
         });
-    }
+}
 
-    function aceChanged() {
-        //console.debug("ace was changed");
-    }
-
-    this.aceConfig = {
-        useWrapMode: true,
-        mode: "python",
-        onLoad: aceLoaded,
-        onChange: aceChanged
+function GreetingLink(scope, element, attr, ctrl) {
+    ctrl.jqconsole = $(element).find("#console").jqconsole("Hi\n", "\n>>>");
+    var startPrompt = function () {
+        // Start the prompt with history enabled.
+        ctrl.jqconsole["Prompt"](true, function (input) {
+            // Output input with the class jqconsole-output.
+            ctrl.jqconsole["Write"](input + "\n", "jqconsole-output");
+            // Restart the prompt.
+            startPrompt();
+        });
     };
+    startPrompt();
 }
 
 function greeting() {
@@ -36,9 +35,10 @@ function greeting() {
             codeSnippet: "=ngModel",
             run: "&run"
         },
-        template: '<div ui-ace="ctrl.aceConfig" ng-model="ctrl.codeSnippet"></div>',
+        template: '<div id="console"></div>',
         controller: GreetingController,
-        controllerAs: "ctrl"
+        controllerAs: "ctrl",
+        link: GreetingLink
     };
 }
 
