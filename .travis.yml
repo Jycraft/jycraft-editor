@@ -1,5 +1,3 @@
-install:
-  - npm install -g npm@2
-  - npm install
-script:
-  - npm run test:unit
+language: node_js
+node_js:
+  - "iojs-v2.3.4"
