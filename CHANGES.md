@@ -4,6 +4,10 @@
 
 - Check in the generated ``npm run build`` results in public
 
+- Simple mocha+es6 test in place with package.json changes
+
+- Hook up to travis
+
 == 0.0.1
 
 - Switch to ES6/webpack

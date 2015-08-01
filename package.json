@@ -6,8 +6,9 @@
   "scripts": {
     "build": "webpack --config webpack.build.js --bail -p",
     "dev": "node node_modules/.bin/webpack-dev-server --history-api-fallback --hot --inline --progress",
-    "test": "karma start",
-    "test:live": "karma start --auto-watch --no-single-run"
+    "test:midway": "karma start",
+    "test:midway:live": "karma start --auto-watch --no-single-run",
+    "test:unit": "mocha --compilers js:mocha-babel tests/*.specs.js"
   },
   "repository": {
     "type": "git",
@@ -63,6 +64,7 @@
     "karma-sourcemap-loader": "^0.3.5",
     "karma-spec-reporter": "0.0.20",
     "karma-webpack": "^1.5.1",
+    "mocha": "^2.2.5",
     "mocha-babel": "^3.0.0",
     "ng-annotate-webpack-plugin": "^0.1.2",
     "null-loader": "^0.1.1",
