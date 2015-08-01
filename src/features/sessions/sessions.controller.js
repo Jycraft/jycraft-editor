@@ -1,6 +1,3 @@
-//import $ from "jquery";
-//require("../../vendor/jqconsole");
-
 export default class Controller {
     constructor($log, $rootScope, connection, $mdToast) {
         var ctrl = this;
@@ -9,8 +6,6 @@ export default class Controller {
         this.connection = connection;
         this.$mdToast = $mdToast;
         this.codeSnippet = "from mcapi import *\nyell('HOWDY')";
-        //this.jqconsole = $("#console").jqconsole("Hi\n", "\n>>>");
-
 
         function aceLoaded(_editor) {
             _editor.commands.addCommand({
@@ -35,25 +30,6 @@ export default class Controller {
             onLoad: aceLoaded,
             onChange: aceChanged
         };
-
-        //// Handle non-login websocket responses, meaning, EvalResponse
-        //$rootScope.$on(
-        //    "EvalResponse",
-        //    function (event, response) {
-        //        ctrl.jqconsole['Write'](
-        //            response.replace("\r", ""), "jqconsole-output");
-        //    });
-        //
-        //var startPrompt = function () {
-        //    // Start the prompt with history enabled.
-        //    ctrl.jqconsole["Prompt"](true, function (input) {
-        //        // Output input with the class jqconsole-output.
-        //        ctrl.jqconsole["Write"](input + "\n", "jqconsole-output");
-        //        // Restart the prompt.
-        //        startPrompt();
-        //    });
-        //};
-        //startPrompt();
     }
 
     run() {
