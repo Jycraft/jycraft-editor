@@ -8,9 +8,9 @@ import "angular-ui-ace/src/ui-ace.js";
 
 import routing from "./sessions.routes";
 import connection from "../../services/connection.service";
-import greeting from "../../directives/greeting.directives";
+import console from "../../directives/console.directive";
 
 export default angular.module("app.sessions",
-    [uirouter, connection, "ui.ace", greeting])
+    [uirouter, connection, "ui.ace", console])
     .config(routing)
     .name;
