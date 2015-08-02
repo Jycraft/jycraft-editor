@@ -4,14 +4,13 @@ print playerPositions()`;
 
 export default class Controller {
     constructor($log, $rootScope, connection, $mdToast) {
-        var ctrl = this;
         this.$log = $log;
         this.$rootScope = $rootScope;
         this.connection = connection;
         this.$mdToast = $mdToast;
         this.codeSnippet = defaultSnippet;
 
-        function aceLoaded(_editor) {
+        var aceLoaded = (_editor) => {
             _editor.commands.addCommand({
                 name: "Execute",
                 bindKey: {
@@ -19,10 +18,10 @@ export default class Controller {
                     win: "Alt-Shift-Up"
                 },
                 exec: function () {
-                    ctrl.run(ctrl.snippet);
+                    this.run(this.snippet);
                 }
             });
-        }
+        };
 
         function aceChanged() {
             //console.debug("ace was changed");
