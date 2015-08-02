@@ -1,3 +1,7 @@
+let defaultSnippet = `
+from player_map import playerPositions
+print playerPositions()`;
+
 export default class Controller {
     constructor($log, $rootScope, connection, $mdToast) {
         var ctrl = this;
@@ -5,7 +9,7 @@ export default class Controller {
         this.$rootScope = $rootScope;
         this.connection = connection;
         this.$mdToast = $mdToast;
-        this.codeSnippet = "from mcapi import *\nyell('HOWDY')";
+        this.codeSnippet = defaultSnippet;
 
         function aceLoaded(_editor) {
             _editor.commands.addCommand({

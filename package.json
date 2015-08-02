@@ -69,6 +69,7 @@
     "mocha-babel": "^3.0.0",
     "ng-annotate-webpack-plugin": "^0.1.2",
     "null-loader": "^0.1.1",
-    "phantomjs": "^1.9.17"
+    "phantomjs": "^1.9.17",
+    "sinon": "^1.15.4"
   }
 }
