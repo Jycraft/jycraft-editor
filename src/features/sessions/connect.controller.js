@@ -1,4 +1,4 @@
-export default class Controller {
+export class ConnectController {
     constructor($log, $scope, $mdToast, connection, $state) {
         this.host = "localhost";
         this.port = 44445;

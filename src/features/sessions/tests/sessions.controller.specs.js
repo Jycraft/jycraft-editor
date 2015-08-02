@@ -1,19 +1,19 @@
 import { expect } from "chai";
 
-import Controller from "../sessions.controller";
+import {SessionsController} from "../sessions.controllers";
 
 describe.only("Controller", () => {
 
     let $log, $rootScope, connection, $mdToast, editor, ctrl;
 
     beforeEach(() => {
-        ctrl = new Controller($log, $rootScope, connection, $mdToast);
+        ctrl = new SessionsController($log, $rootScope, connection, $mdToast);
     });
 
     it("can be imported", () => {
-        expect(Controller).to.be.an("function");
+        expect(SessionsController).to.be.an("function");
     });
-    
+
     it("can be constructed", () => {
         expect(ctrl).to.be.an("object");
     });

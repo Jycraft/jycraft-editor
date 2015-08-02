@@ -1,8 +1,15 @@
+
+export class SessionsController {
+    constructor() {
+
+    }
+}
+
 let defaultSnippet = `
 from player_map import playerPositions
 print playerPositions()`;
 
-export default class Controller {
+export class SessionController {
     constructor($log, $rootScope, connection, $mdToast) {
         this.$log = $log;
         this.$rootScope = $rootScope;
