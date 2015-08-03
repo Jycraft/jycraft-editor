@@ -1,14 +1,8 @@
 <md-toolbar layout="row">
   <div class="md-toolbar-tools">
     <a ui-sref="home"><h1 flex="20">Jycraft Codecraft</h1></a>
-    <md-button ng-if="!ctrl.connection.isConnected"
-               ui-sref="connect" class="md-raised">
-      Connect
-    </md-button>
-    <md-button ng-if="ctrl.connection.isConnected"
-               ui-sref="session" class="md-raised">
-      Session
-    </md-button>
+    <a ui-sref="sessions"
+       style="padding-left: 1em"><h1 flex="20">Sessions</h1></a>
   </div>
 </md-toolbar>
 <ui-view></ui-view>

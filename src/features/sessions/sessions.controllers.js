@@ -1,7 +1,7 @@
 
 export class SessionsController {
-    constructor() {
-
+    constructor($stateParams) {
+        this.sessionId = $stateParams.id;
     }
 }
 
