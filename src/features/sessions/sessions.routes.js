@@ -18,9 +18,8 @@ export default function routes($stateProvider) {
             controller: SessionsController,
             controllerAs: "ctrl"
         })
-        .state("session", {
-            parent: "root",
-            url: "/sessions/1",
+        .state("sessions.view", {
+            url: "/:id",
             template: require("./session.html"),
             controller: SessionController,
             controllerAs: "ctrl",

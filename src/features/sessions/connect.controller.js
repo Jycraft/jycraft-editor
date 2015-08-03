@@ -16,7 +16,7 @@ export class ConnectController {
                 if (connection.isConnected) {
                     // Navigate away, we're connected
                     $mdToast.show($mdToast.simple().content("You are connected"));
-                    $state.go("session");
+                    $state.go("sessions");
                 }
             }
         );
