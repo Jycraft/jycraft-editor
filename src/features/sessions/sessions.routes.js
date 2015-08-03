@@ -14,7 +14,14 @@ export default function routes($stateProvider) {
         .state("sessions", {
             parent: "root",
             url: "/sessions",
-            template: require("./sessions.html"),
+            template: "<ui-view></ui-view>",
+            controller: SessionsController,
+            controllerAs: "ctrl"
+        })
+        .state("sessions.list", {
+            parent: "sessions",
+            url: "/list",
+            template: require("./sessions.list.html"),
             controller: SessionsController,
             controllerAs: "ctrl"
         })
@@ -23,6 +30,11 @@ export default function routes($stateProvider) {
             template: require("./session.html"),
             controller: SessionController,
             controllerAs: "ctrl",
-            requiresConnection: true
+            resolve: {
+                sessionId: function ($stateParams, connection) {
+                    connection.connect("localhost", 44445, "swordfish");
+                    return $stateParams.id;
+                }
+            }
         });
 }

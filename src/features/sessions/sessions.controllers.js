@@ -1,7 +1,6 @@
 
 export class SessionsController {
-    constructor($stateParams) {
-        this.sessionId = $stateParams.id;
+    constructor() {
     }
 }
 
@@ -10,11 +9,12 @@ from player_map import playerPositions
 print playerPositions()`;
 
 export class SessionController {
-    constructor($log, $rootScope, connection, $mdToast) {
+    constructor($log, $rootScope, $mdToast, sessionId, connection) {
         this.$log = $log;
         this.$rootScope = $rootScope;
-        this.connection = connection;
         this.$mdToast = $mdToast;
+        this.sessionId = sessionId;
+        this.connection = connection;
         this.codeSnippet = defaultSnippet;
 
         var aceLoaded = (_editor) => {
