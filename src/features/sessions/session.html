@@ -1,6 +1,12 @@
 <md-toolbar layout="row" style="background-color: lightgray">
   <div class="md-toolbar-tools">
-    <a ui-sref="sessions">Session {{ctrl.sessionId}}</a>
+    <span>Session {{ctrl.sessionId}}</span>
+    <md-button ui-sref="sessions.view({id: ctrl.sessionId})"
+               class="groupX left">Edit
+    </md-button>
+    <md-button ui-sref="sessions.view({id: ctrl.sessionId})"
+               class="groupX middle">Map
+    </md-button>
   </div>
 </md-toolbar>
 <div layout="row" class="md-padding">
