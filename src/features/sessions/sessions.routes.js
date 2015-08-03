@@ -1,6 +1,8 @@
 import { ConnectController } from "./connect.controller";
 import { SessionsController } from "./sessions.controllers";
 import { SessionController } from "./sessions.controllers";
+import { SessionEditController } from "./sessions.controllers";
+import { SessionMapController } from "./sessions.controllers";
 
 export default function routes($stateProvider) {
     $stateProvider
@@ -29,6 +31,8 @@ export default function routes($stateProvider) {
             parent: "sessions",
             url: "/:id",
             template: require("./session.html"),
+            controller: SessionController,
+            controllerAs: "ctrl",
             resolve: {
                 sessionId: function ($stateParams, connection) {
                     connection.connect("localhost", 44445, "swordfish");
@@ -37,9 +41,17 @@ export default function routes($stateProvider) {
             }
         })
         .state("session.edit", {
+            parent: "session",
             url: "/edit",
             template: require("./session.edit.html"),
-            controller: SessionController,
+            controller: SessionEditController,
+            controllerAs: "ctrl"
+        })
+        .state("session.map", {
+            parent: "session",
+            url: "/map",
+            template: require("./session.map.html"),
+            controller: SessionMapController,
             controllerAs: "ctrl"
         });
 }
