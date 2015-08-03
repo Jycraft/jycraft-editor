@@ -1,0 +1,17 @@
+<div layout="row" class="md-padding">
+  <div flex>
+    <div layout="row">
+      <h2>Edit</h2>
+      <span flex></span>
+      <md-button class="md-mini" ng-click="ctrl.run(ctrl.codeSnippet)">
+        Run
+      </md-button>
+    </div>
+    <div ui-ace="ctrl.aceConfig" ng-model="ctrl.codeSnippet" flex></div>
+  </div>
+  <div flex>
+    <h2>Output</h2>
+
+    <console></console>
+  </div>
+</div>

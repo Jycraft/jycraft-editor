@@ -25,16 +25,21 @@ export default function routes($stateProvider) {
             controller: SessionsController,
             controllerAs: "ctrl"
         })
-        .state("sessions.view", {
+        .state("session", {
+            parent: "sessions",
             url: "/:id",
             template: require("./session.html"),
-            controller: SessionController,
-            controllerAs: "ctrl",
             resolve: {
                 sessionId: function ($stateParams, connection) {
                     connection.connect("localhost", 44445, "swordfish");
                     return $stateParams.id;
                 }
             }
+        })
+        .state("session.edit", {
+            url: "/edit",
+            template: require("./session.edit.html"),
+            controller: SessionController,
+            controllerAs: "ctrl"
         });
 }
