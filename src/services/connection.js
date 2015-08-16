@@ -16,6 +16,13 @@ export default class Connection {
             $websocket = this.$websocket,
             $mdToast = this.$mdToast;
         ctrl.dataStream = $websocket("ws://" + host + ":" + port);
+
+
+        let fullResponse = {
+            isStarted: false,
+            value: ''
+
+        };
         ctrl.dataStream.onMessage(function (message) {
             var response = message.data;
 
@@ -28,6 +35,21 @@ export default class Connection {
                 " sending 'login!<PASSWORD>'") {
                 ctrl.isConnected = false;
                 ctrl.loginFailed = true;
+            } else if (response == '$') {
+                // Here's the fun stuff, handle a series of characters in
+                // the response, starting and finishing with $, and
+                // treat those in between as a JSON stream. Gotta fix
+                // the server plugin.
+                if (fullResponse.isStarted) {
+                    // We received our second $, let's emit a message
+                    $rootScope.$broadcast("JsonResponse", JSON.parse(fullResponse.value));
+                    fullResponse.isStarted = false;
+                    fullResponse.value = '';
+                } else {
+                    fullResponse.isStarted = true;
+                }
+            } else if (fullResponse.isStarted && response != '$') {
+                fullResponse.value += response;
             } else {
                 ctrl.isConnected = true;
                 ctrl.loginFailed = false;

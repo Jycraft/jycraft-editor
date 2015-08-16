@@ -1,3 +1,17 @@
 <div layout="row" class="md-padding">
-  <h2>Map</h2>
+  <div flex>
+    <div layout="row">
+      <h2>Map</h2>
+      <span flex></span>
+      <md-button class="md-mini" ng-click="ctrl.refresh()">
+        Refresh
+      </md-button>
+    </div>
+  </div>
+</div>
+<div layout="row" class="md-padding">
+  <div class="jycraft-player"
+       ng-repeat="(name, position) in ctrl.players track by name"
+       ng-bind="name"
+       ng-style="{'left': position.x, 'top': position.y}"></div>
 </div>
