@@ -20,22 +20,22 @@ export default class Connection {
 
         let fullResponse = {
             isStarted: false,
-            value: ''
+            value: ""
 
         };
         ctrl.dataStream.onMessage(function (message) {
             var response = message.data;
 
             // Parse various kinds of responses
-            if (response === "Login by sending 'login!<PASSWORD>'") {
+            if (response === `Login by sending 'login!<PASSWORD>'`) {
                 // This is the response on the first connection, do
                 // nothing
                 ctrl.isConnected = false;
             } else if (response === "Not authorized, login first by" +
-                " sending 'login!<PASSWORD>'") {
+                ` sending 'login!<PASSWORD>'`) {
                 ctrl.isConnected = false;
                 ctrl.loginFailed = true;
-            } else if (response == '$') {
+            } else if (response == "$") {
                 // Here's the fun stuff, handle a series of characters in
                 // the response, starting and finishing with $, and
                 // treat those in between as a JSON stream. Gotta fix
@@ -44,11 +44,11 @@ export default class Connection {
                     // We received our second $, let's emit a message
                     $rootScope.$broadcast("JsonResponse", JSON.parse(fullResponse.value));
                     fullResponse.isStarted = false;
-                    fullResponse.value = '';
+                    fullResponse.value = "";
                 } else {
                     fullResponse.isStarted = true;
                 }
-            } else if (fullResponse.isStarted && response != '$') {
+            } else if (fullResponse.isStarted && response != "$") {
                 fullResponse.value += response;
             } else {
                 ctrl.isConnected = true;

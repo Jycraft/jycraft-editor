@@ -15,7 +15,7 @@ export class SessionMapController {
         this.$rootScope = $rootScope;
         this.connection = connection;
         this.players = {
-            "PMD221": {x: '555px', y: '444px'}
+            "PMD221": {x: "555px", y: "444px"}
         };
         var ctrl = this;
 
@@ -28,10 +28,10 @@ export class SessionMapController {
             function (event, response) {
                 //randomIntFromInterval(100,
                 // 500);
-                var x = response['PMD221'].x;
-                var y = response['PMD221'].y;
-                ctrl.players['PMD221'].x = `${x}px`;
-                ctrl.players['PMD221'].y = `${y}px`;
+                var x = response["PMD221"].x;
+                var y = response["PMD221"].y;
+                ctrl.players["PMD221"].x = `${x}px`;
+                ctrl.players["PMD221"].y = `${y}px`;
             });
         var poll = $interval(function () {
             ctrl.refresh();

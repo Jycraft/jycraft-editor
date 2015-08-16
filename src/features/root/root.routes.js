@@ -1,5 +1,5 @@
 export default function routing($stateProvider) {
-    $stateProvider.state('root', {
+    $stateProvider.state("root", {
             abstract: true,
             template: require("./root.html"),
             controller: require("./root.controller"),
