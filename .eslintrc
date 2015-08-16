@@ -3,8 +3,8 @@
   "rules": {
     "strict": 0,
     "quotes": [
-      2,
-      "single"
+      1,
+      "double"
     ]
   },
   "env": {
