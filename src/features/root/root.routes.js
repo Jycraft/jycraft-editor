@@ -1,4 +1,4 @@
-export default function routing($stateProvider) {
+function routing($stateProvider) {
     $stateProvider.state("root", {
             abstract: true,
             template: require("./root.html"),
@@ -7,3 +7,6 @@ export default function routing($stateProvider) {
         }
     );
 }
+routing.$inject = ["$stateProvider"];
+
+export default routing;

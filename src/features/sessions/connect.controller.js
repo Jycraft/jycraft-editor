@@ -1,4 +1,4 @@
-export class ConnectController {
+class ConnectController {
     constructor($log, $scope, $mdToast, connection, $state) {
         this.host = "localhost";
         this.port = 44445;
@@ -39,3 +39,6 @@ export class ConnectController {
         this.connection.connect(host, port, password);
     }
 }
+ConnectController.$inject = ["$log", "$scope", "$mdToast", "connection", "$state"];
+
+export default ConnectController;

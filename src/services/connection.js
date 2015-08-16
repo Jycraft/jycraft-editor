@@ -1,4 +1,4 @@
-export default class Connection {
+class Connection {
     constructor($log, $rootScope, $websocket, $mdToast) {
         this.dataStream = null;
         this.isConnected = false;
@@ -83,3 +83,4 @@ export default class Connection {
 
 Connection.$inject = ["$log", "$rootScope", "$websocket", "$mdToast"];
 
+export default Connection;

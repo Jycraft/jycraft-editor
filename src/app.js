@@ -13,7 +13,10 @@ import home from "./features/home";
 import sessions from "./features/sessions";
 
 angular.module("app", [ngMaterial, "ngMdIcons", uirouter,
-    root, home, sessions])
+    root,
+    home,
+    sessions
+])
     .config(routeConfig)
     .config(theming)
     .run(routeRun);

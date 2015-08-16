@@ -2,13 +2,14 @@ export class SessionsController {
     constructor() {
     }
 }
+SessionsController.$inject = [];
 
 export class SessionController {
     constructor(sessionId) {
         this.sessionId = sessionId;
     }
-
 }
+SessionController.$inject = ["sessionId"];
 
 export class SessionMapController {
     constructor($rootScope, $scope, $interval, connection) {
@@ -48,6 +49,7 @@ print playerPositions()`;
         this.connection.send(snippet);
     }
 }
+SessionMapController.$inject = ["$rootScope", "$scope", "$interval", "connection"];
 
 let defaultSnippet = `
 from player_map import playerPositions
@@ -95,3 +97,4 @@ export class SessionEditController {
         this.connection.send(this.codeSnippet);
     }
 }
+SessionEditController.$inject = ["$log", "$rootScope", "$mdToast", "connection"];

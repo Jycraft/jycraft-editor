@@ -1,4 +1,4 @@
-export default function routes($stateProvider) {
+function routes($stateProvider) {
     $stateProvider
         .state("home", {
             parent: "root",
@@ -8,3 +8,5 @@ export default function routes($stateProvider) {
             controllerAs: "ctrl"
         });
 }
+routes.$inject = ["$stateProvider"];
+export default routes;

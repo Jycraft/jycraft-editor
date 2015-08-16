@@ -1,10 +1,10 @@
-import { ConnectController } from "./connect.controller";
+import ConnectController from "./connect.controller";
 import { SessionsController } from "./sessions.controllers";
 import { SessionController } from "./sessions.controllers";
 import { SessionEditController } from "./sessions.controllers";
 import { SessionMapController } from "./sessions.controllers";
 
-export default function routes($stateProvider) {
+function routes($stateProvider) {
     $stateProvider
         .state("connect", {
             parent: "root",
@@ -55,3 +55,6 @@ export default function routes($stateProvider) {
             controllerAs: "ctrl"
         });
 }
+routes.$inject = ["$stateProvider"];
+
+export default routes;

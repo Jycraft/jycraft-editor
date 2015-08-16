@@ -12,3 +12,4 @@ export default function theming($mdThemingProvider) {
         })
         .accentPalette("pink");
 }
+theming.$inject = ["$mdThemingProvider"];

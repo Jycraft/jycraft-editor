@@ -1,4 +1,7 @@
-export default class Controller {
+class Controller {
     constructor() {
     }
 }
+Controller.$inject = [];
+
+export default Controller;

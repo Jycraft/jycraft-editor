@@ -1,7 +1,7 @@
 import $ from "jquery";
 require("../vendor/jqconsole");
 
-export function ConsoleController($rootScope) {
+function ConsoleController($rootScope) {
     var ctrl = this;
     // Handle non-login websocket responses, meaning, EvalResponse
     $rootScope.$on(
@@ -11,8 +11,9 @@ export function ConsoleController($rootScope) {
                 response.replace("\r", ""), "jqconsole-output");
         });
 }
+ConsoleController.$inject = ["$rootScope"];
 
-export function ConsoleLink(scope, element, attr, ctrl) {
+function ConsoleLink(scope, element, attr, ctrl) {
     ctrl.jqconsole = $(element).find("#console").jqconsole("Hi\n", "\n>>>");
     var startPrompt = function () {
         // Start the prompt with history enabled.
@@ -25,13 +26,13 @@ export function ConsoleLink(scope, element, attr, ctrl) {
     };
     startPrompt();
 }
+ConsoleLink.$inject = ["scope", "element", "attr", "ctrl"];
 
 export default function Console() {
     return {
         restrict: "E",
         scope: {},
-        bindToController: {
-        },
+        bindToController: {},
         template: '<div id="console"></div>',
         controller: ConsoleController,
         controllerAs: "ctrl",
