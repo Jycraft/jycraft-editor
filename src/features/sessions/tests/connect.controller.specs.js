@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-import { ConnectController } from "../connect.controller";
+import ConnectController from "../connect.controller";
 
 describe.only("ConnectController", () => {
 

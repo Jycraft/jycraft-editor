@@ -8,8 +8,8 @@
     "dev": "node node_modules/.bin/webpack-dev-server --history-api-fallback --hot --inline --progress",
     "test:midway": "karma start",
     "test:midway:live": "karma start --auto-watch --no-single-run",
-    "test:unit": "mocha --compilers js:mocha-babel src/**/*.specs.js",
-    "test": "mocha --compilers js:mocha-babel src/**/*.specs.js"
+    "test:unit": "mocha --compilers babel:babel/register src/**/*.specs.js",
+    "test": "mocha --compilers babel:babel/register src/**/*.specs.js"
   },
   "repository": {
     "type": "git",
@@ -62,7 +62,6 @@
     "karma-spec-reporter": "0.0.20",
     "karma-webpack": "1.7.0",
     "mocha": "2.2.5",
-    "mocha-babel": "3.0.0",
     "node-libs-browser": "0.5.2",
     "null-loader": "0.1.1",
     "phantomjs": "1.9.18",
