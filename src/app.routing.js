@@ -1,8 +1,8 @@
 export function routeConfig($urlRouterProvider) {
-    //$urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/");
 }
 routeConfig.$inject = ["$urlRouterProvider"];
 
 export function routeRun() {
 }
-routeConfig.$inject = [];
+routeRun.$inject = [];
