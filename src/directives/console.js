@@ -7,7 +7,7 @@ function ConsoleController($rootScope) {
     $rootScope.$on(
         "EvalResponse",
         function (event, response) {
-            ctrl.jqconsole['Write'](
+            ctrl.jqconsole["Write"](
                 response.replace("\r", ""), "jqconsole-output");
         });
 }
@@ -33,7 +33,7 @@ export default function Console() {
         restrict: "E",
         scope: {},
         bindToController: {},
-        template: '<div id="console"></div>',
+        template: `<div id="console"></div>`,
         controller: ConsoleController,
         controllerAs: "ctrl",
         link: ConsoleLink
