@@ -4,12 +4,12 @@ import { expect } from "chai";
 
 import {SessionsController} from "../sessions.controllers";
 
-describe.only("Controller", () => {
+describe("Controller", () => {
 
-    let $log, $rootScope, connection, $mdToast, editor, ctrl;
+    let $log, $rootScope, connection, toast, editor, ctrl;
 
     beforeEach(() => {
-        ctrl = new SessionsController($log, $rootScope, connection, $mdToast);
+        ctrl = new SessionsController($log, $rootScope, connection, toast);
     });
 
     it("can be imported", () => {

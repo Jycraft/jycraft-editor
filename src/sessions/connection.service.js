@@ -1,14 +1,14 @@
 "use strict";
 
 class Connection {
-    constructor($log, $rootScope, $websocket, $mdToast) {
+    constructor($log, $rootScope, $websocket, toast) {
         this.dataStream = null;
         this.isConnected = false;
         this.loginFailed = false;
         this.$log = $log;
         this.$rootScope = $rootScope;
         this.$websocket = $websocket;
-        this.$mdToast = $mdToast;
+        this.toast = toast;
     }
 
     connect(host, port, password) {
@@ -29,7 +29,7 @@ class Connection {
             // nothing
             this.isConnected = false;
         }else if (response.startsWith("Incorrect password!")) {
-            this.toast("Incorrect password");
+            this.toast.show("Incorrect password");
         } else if (response.startsWith("Not authorized, login first")) {
             this.isConnected = false;
             this.loginFailed = true;
@@ -49,25 +49,21 @@ class Connection {
         let code = event.code;
         let reason = closeErrors[code] ? closeErrors[code] : "Unknown reason";
 
-        this.toast("Connection closed: " + reason);
+        this.toast.show("Connection closed: " + reason);
 
     }
 
     send(codeSnippet) {
         var ctrl = this;
         if (this.dataStream == null) {
-            this.toast("Not connected");
+            this.toast.show("Not connected");
         } else {
             ctrl.dataStream.send(codeSnippet);
         }
     }
-
-    toast(message) {
-        this.$mdToast.show(this.$mdToast.simple().content(message));
-    }
 }
 
-Connection.$inject = ["$log", "$rootScope", "$websocket", "$mdToast"];
+Connection.$inject = ["$log", "$rootScope", "$websocket", "toast"];
 
 export default Connection;
 

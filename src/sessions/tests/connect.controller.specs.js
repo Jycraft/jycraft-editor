@@ -4,9 +4,9 @@ import { expect } from "chai";
 
 import ConnectController from "../connect.controller";
 
-describe.only("ConnectController", () => {
+describe("ConnectController", () => {
 
-    let $log, $scope, connection, $mdToast, $state, ctrl;
+    let $log, $scope, connection, toast, $state, ctrl;
 
     beforeEach(() => {
         $scope = {
@@ -17,7 +17,7 @@ describe.only("ConnectController", () => {
     });
 
     beforeEach(() => {
-        ctrl = new ConnectController($log, $scope, $mdToast, connection, $state);
+        ctrl = new ConnectController($log, $scope, toast, connection, $state);
     });
 
     it("can be imported", () => {

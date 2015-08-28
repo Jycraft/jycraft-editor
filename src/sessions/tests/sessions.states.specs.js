@@ -2,7 +2,7 @@
 
 import { expect } from "chai";
 
-import states from "../sessions.states";
+import {states} from "../sessions.states";
 
 describe("states", () => {
     it("can be imported", () => {

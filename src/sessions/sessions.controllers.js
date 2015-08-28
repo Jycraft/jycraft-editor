@@ -65,10 +65,10 @@ from mcapi import yell
 yell("Howdy")`;
 
 export class SessionEditController {
-    constructor($log, $rootScope, $mdToast, connection) {
+    constructor($log, $rootScope, toast, connection) {
         this.$log = $log;
         this.$rootScope = $rootScope;
-        this.$mdToast = $mdToast;
+        this.toast = toast;
         this.connection = connection;
         this.codeSnippet = defaultSnippet;
 
@@ -100,10 +100,9 @@ export class SessionEditController {
     run() {
         // Make sure we are still connected
         if (!this.connection.isConnected) {
-            let msg = "Lost the connection";
-            $mdToast.show($mdToast.simple().content(msg));
+            this.toast.show("Lost the connection");
         }
         this.connection.send(this.codeSnippet);
     }
 }
-SessionEditController.$inject = ["$log", "$rootScope", "$mdToast", "connection"];
+SessionEditController.$inject = ["$log", "$rootScope", "toast", "connection"];
