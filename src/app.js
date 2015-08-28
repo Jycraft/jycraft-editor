@@ -8,9 +8,9 @@ import "angular-material-icons";
 import {routeConfig} from "./app.routing";
 import {routeRun} from "./app.routing";
 import theming from "./app.theming";
-import root from "./features/root";
-import home from "./features/home";
-import sessions from "./features/sessions";
+import root from "./root";
+import home from "./home";
+import sessions from "./sessions";
 
 angular.module("app", [ngMaterial, "ngMdIcons", uirouter,
     root,
