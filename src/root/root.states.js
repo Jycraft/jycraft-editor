@@ -1,12 +1,16 @@
-function routing($stateProvider) {
+"use strict";
+
+import RootController from "./root.controller";
+
+function states($stateProvider) {
     $stateProvider.state("root", {
             abstract: true,
             template: require("./root.html"),
-            controller: require("./root.controller"),
+            controller: RootController,
             controllerAs: "ctrl"
         }
     );
 }
-routing.$inject = ["$stateProvider"];
+states.$inject = ["$stateProvider"];
 
-export default routing;
+export default states;

@@ -1,3 +1,5 @@
+"use strict";
+
 import "./root.css";
 
 import angular from "angular";
