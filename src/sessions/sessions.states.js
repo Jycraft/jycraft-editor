@@ -3,8 +3,6 @@
 import ConnectController from "./connect.controller";
 import { SessionsController } from "./sessions.controllers";
 import { SessionController } from "./sessions.controllers";
-import { SessionEditController } from "./sessions.controllers";
-import { SessionMapController } from "./sessions.controllers";
 
 function states($stateProvider) {
     $stateProvider
@@ -34,20 +32,6 @@ function states($stateProvider) {
             controller: SessionController,
             controllerAs: "ctrl",
             resolve: SessionController.resolve
-        })
-        .state("session.edit", {
-            parent: "session",
-            url: "/edit",
-            template: require("./session.edit.html"),
-            controller: SessionEditController,
-            controllerAs: "ctrl"
-        })
-        .state("session.map", {
-            parent: "session",
-            url: "/map",
-            template: require("./session.map.html"),
-            controller: SessionMapController,
-            controllerAs: "ctrl"
         });
 }
 states.$inject = ["$stateProvider"];

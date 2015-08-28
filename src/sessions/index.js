@@ -14,9 +14,11 @@ import "angular-ui-ace/src/ui-ace.js";
 import {states} from "./sessions.states";
 import Connection from "./connection.service";
 import Console from "./console.directive";
+import Edit from "./edit";
 
 export default angular.module("app.sessions",
-    [uirouter, "ngWebSocket", "ui.ace"])
+    [uirouter, "ngWebSocket", "ui.ace",
+        Edit])
     .config(states)
     .service("connection", Connection)
     .directive("console", Console)
