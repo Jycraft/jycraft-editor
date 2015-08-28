@@ -1,9 +1,9 @@
 import { expect } from "chai";
 
-import routes from "../home.routes";
+import {states} from "../home.states";
 
 describe("routes", () => {
     it("can be imported", () => {
-        expect(routes).to.be.an('function');
+        expect(states).to.be.an('function');
     });
 });

@@ -1,8 +1,8 @@
 import angular from "angular";
 import uirouter from "angular-ui-router";
 
-import routing from "./home.routes";
+import {states} from "./home.states";
 
 export default angular.module("app.home", [uirouter])
-    .config(routing)
+    .config(states)
     .name;
