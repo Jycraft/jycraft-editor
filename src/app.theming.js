@@ -1,4 +1,4 @@
-export default function theming($mdThemingProvider) {
+function themingConfig($mdThemingProvider) {
     var customBlueMap = $mdThemingProvider.extendPalette("light-blue", {
         "contrastDefaultColor": "light",
         "contrastDarkColors": ["50"],
@@ -12,4 +12,6 @@ export default function theming($mdThemingProvider) {
         })
         .accentPalette("pink");
 }
-theming.$inject = ["$mdThemingProvider"];
+themingConfig.$inject = ["$mdThemingProvider"];
+
+export default themingConfig;
