@@ -10,6 +10,13 @@ export class SessionController {
     }
 }
 SessionController.$inject = ["sessionId"];
+SessionController.resolve = {
+    sessionId: ["$stateParams", "connection",
+        function ($stateParams, connection) {
+            connection.connect("localhost", 44445, "swordfish");
+            return $stateParams.id;
+        }]
+};
 
 export class SessionMapController {
     constructor($rootScope, $scope, $interval, connection) {

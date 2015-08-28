@@ -3,6 +3,11 @@ export function routeConfig($urlRouterProvider) {
 }
 routeConfig.$inject = ["$urlRouterProvider"];
 
-export function routeRun() {
+export function routeRun($log, $rootScope, $mdToast) {
+    $rootScope.$on("$stateChangeError", function (evt, toState, toParams, fromState, fromParams, error) {
+        let message = "Failed to change states";
+        $log.debug("State change failed:", toState, error);
+        $mdToast.show($mdToast.simple().content(message));
+    });
 }
-routeRun.$inject = [];
+routeRun.$inject = ["$log", "$rootScope", "$mdToast"];

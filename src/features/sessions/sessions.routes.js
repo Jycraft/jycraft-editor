@@ -16,9 +16,7 @@ function routes($stateProvider) {
         .state("sessions", {
             parent: "root",
             url: "/sessions",
-            template: "<ui-view></ui-view>",
-            controller: SessionsController,
-            controllerAs: "ctrl"
+            template: "<ui-view></ui-view>"
         })
         .state("sessions.list", {
             parent: "sessions",
@@ -33,12 +31,7 @@ function routes($stateProvider) {
             template: require("./session.html"),
             controller: SessionController,
             controllerAs: "ctrl",
-            resolve: {
-                sessionId: function ($stateParams, connection) {
-                    connection.connect("localhost", 44445, "swordfish");
-                    return $stateParams.id;
-                }
-            }
+            resolve: SessionController.resolve
         })
         .state("session.edit", {
             parent: "session",
