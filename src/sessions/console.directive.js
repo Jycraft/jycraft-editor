@@ -8,10 +8,10 @@ function ConsoleController($rootScope) {
     // Handle non-login websocket responses, meaning, EvalResponse
     $rootScope.$on(
         "EvalResponse",
-        function (event, response) {
+        (event, response) =>
             ctrl.jqconsole["Write"](
-                response.replace("\r", ""), "jqconsole-output");
-        });
+                response.replace("\r", ""), "jqconsole-output")
+    );
 }
 ConsoleController.$inject = ["$rootScope"];
 

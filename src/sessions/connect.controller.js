@@ -11,10 +11,8 @@ class ConnectController {
 
         // Handle a good connection
         $scope.$watch(
-            function () {
-                return connection.isConnected;
-            },
-            function () {
+            () => connection.isConnected,
+            () => {
                 if (connection.isConnected) {
                     // Navigate away, we're connected
                     toast.show("You are connected");
@@ -25,10 +23,8 @@ class ConnectController {
 
         // Handle connection error
         $scope.$watch(
-            function () {
-                return connection.loginFailed;
-            },
-            function (err) {
+            () => connection.loginFailed,
+            (err) => {
                 if (connection.loginFailed) {
                     toast.show("Error: " + err);
                 }
