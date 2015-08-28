@@ -52,8 +52,8 @@ print playerPositions()`;
 SessionMapController.$inject = ["$rootScope", "$scope", "$interval", "connection"];
 
 let defaultSnippet = `
-from player_map import playerPositions
-print playerPositions()`;
+from mcapi import yell
+yell("Howdy")`;
 
 export class SessionEditController {
     constructor($log, $rootScope, $mdToast, connection) {
