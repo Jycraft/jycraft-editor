@@ -1,10 +1,12 @@
+"use strict";
+
 import ConnectController from "./connect.controller";
 import { SessionsController } from "./sessions.controllers";
 import { SessionController } from "./sessions.controllers";
 import { SessionEditController } from "./sessions.controllers";
 import { SessionMapController } from "./sessions.controllers";
 
-function routes($stateProvider) {
+function states($stateProvider) {
     $stateProvider
         .state("connect", {
             parent: "root",
@@ -48,6 +50,6 @@ function routes($stateProvider) {
             controllerAs: "ctrl"
         });
 }
-routes.$inject = ["$stateProvider"];
+states.$inject = ["$stateProvider"];
 
-export default routes;
+export {states};
