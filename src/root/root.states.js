@@ -13,4 +13,4 @@ function states($stateProvider) {
 }
 states.$inject = ["$stateProvider"];
 
-export default states;
+export {states};
