@@ -54,8 +54,7 @@ class Connection {
     }
 
     send(codeSnippet) {
-        var ctrl = this,
-            $mdToast = this.$mdToast;
+        var ctrl = this;
         if (this.dataStream == null) {
             this.toast("Not connected");
         } else {
