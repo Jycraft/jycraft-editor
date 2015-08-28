@@ -10,38 +10,36 @@ class Connection {
     }
 
     connect(host, port, password) {
-        var ctrl = this,
-            $rootScope = this.$rootScope;
-        ctrl.dataStream = this.$websocket("ws://" + host + ":" + port);
+        this.dataStream = this.$websocket("ws://" + host + ":" + port);
 
+        this.dataStream.onMessage((message) => this.onMessage(message));
+        this.dataStream.onOpen(() => this.onOpen(password));
+        this.dataStream.onClose((event) => this.onClose(event));
+    }
 
-        let fullResponse = {
-            isStarted: false,
-            value: ""
+    onMessage(message) {
+        // Dispatcher for different kinds of messages
+        let response = message.data;
 
-        };
-        ctrl.dataStream.onMessage(function (message) {
-            var response = message.data;
+        // Parse various kinds of responses
+        if (response === `Login by sending 'login!<PASSWORD>'`) {
+            // This is the response on the first connection, do
+            // nothing
+            this.isConnected = false;
+        }else if (response.startsWith("Incorrect password!")) {
+            this.toast("Incorrect password");
+        } else if (response.startsWith("Not authorized, login first")) {
+            this.isConnected = false;
+            this.loginFailed = true;
+        } else {
+            this.isConnected = true;
+            this.loginFailed = false;
+            this.$rootScope.$broadcast("EvalResponse", response);
+        }
+    }
 
-            // Parse various kinds of responses
-            if (response === `Login by sending 'login!<PASSWORD>'`) {
-                // This is the response on the first connection, do
-                // nothing
-                ctrl.isConnected = false;
-            } else if (response === "Not authorized, login first by" +
-                ` sending 'login!<PASSWORD>'`) {
-                ctrl.isConnected = false;
-                ctrl.loginFailed = true;
-            } else {
-                ctrl.isConnected = true;
-                ctrl.loginFailed = false;
-                $rootScope.$broadcast("EvalResponse", response);
-            }
-        });
-        ctrl.dataStream.onOpen(function () {
-            ctrl.dataStream.send("login!" + password);
-        });
-        ctrl.dataStream.onClose((event) => this.onClose(event));
+    onOpen(password) {
+        this.dataStream.send("login!" + password);
     }
 
     onClose(event) {
