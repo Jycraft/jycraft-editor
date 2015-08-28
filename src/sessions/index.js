@@ -11,10 +11,9 @@ import "angular-ui-ace/src/ui-ace.js";
 
 import routing from "./sessions.routes";
 import Connection from "./connection.service";
-import console from "../directives/console.directive";
 
 export default angular.module("app.sessions",
-    [uirouter, "ngWebSocket", "ui.ace", console])
+    [uirouter, "ngWebSocket", "ui.ace"])
     .config(routing)
     .service("connection", Connection)
     .name;
