@@ -1,3 +1,5 @@
+"use strict";
+
 class ConnectController {
     constructor($log, $scope, $mdToast, connection, $state) {
         this.host = "localhost";

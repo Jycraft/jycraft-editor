@@ -1,3 +1,5 @@
+"use strict";
+
 import "./sessions.css";
 
 import angular from "angular";

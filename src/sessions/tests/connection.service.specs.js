@@ -1,3 +1,5 @@
+"use strict";
+
 import { expect } from "chai";
 
 import Connection from "../connection.service";

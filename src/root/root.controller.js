@@ -1,3 +1,5 @@
+"use strict";
+
 class Controller {
     constructor($log, connection) {
         this.$log = $log;

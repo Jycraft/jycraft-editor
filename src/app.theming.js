@@ -1,3 +1,5 @@
+"use strict";
+
 function themingConfig($mdThemingProvider) {
     var customBlueMap = $mdThemingProvider.extendPalette("light-blue", {
         "contrastDefaultColor": "light",
