@@ -1,3 +1,5 @@
+"use strict";
+
 class Connection {
     constructor($log, $rootScope, $websocket, $mdToast) {
         this.dataStream = null;
@@ -103,4 +105,4 @@ var closeErrors = {
     request.`,
     1015: `The connection was closed due to a failure to perform a TLS handshake (e.g., the server certificate can't be verified).`
 
-}
+};
