@@ -1,11 +1,9 @@
-"use strict";
+import { expect } from 'chai';
 
-import { expect } from "chai";
+import Connection from '../connection.service';
 
-import Connection from "../connection.service";
-
-describe("Connections", () => {
-    it("can be imported", () => {
+describe('Connections', () => {
+    it('can be imported', () => {
         expect(Connection).to.be.a('function');
     });
 });

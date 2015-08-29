@@ -1,10 +1,8 @@
-"use strict";
-
 class ConnectController {
-    constructor($log, $scope, toast, connection, $state) {
-        this.host = "localhost";
+    constructor ($log, $scope, toast, connection, $state) {
+        this.host = 'localhost';
         this.port = 44445;
-        this.password = "swordfish";
+        this.password = 'swordfish';
         this.$log = $log;
         this.$state = $state;
         this.connection = connection;
@@ -15,8 +13,8 @@ class ConnectController {
             () => {
                 if (connection.isConnected) {
                     // Navigate away, we're connected
-                    toast.show("You are connected");
-                    $state.go("sessions.list");
+                    toast.show('You are connected');
+                    $state.go('sessions.list');
                 }
             }
         );
@@ -26,17 +24,17 @@ class ConnectController {
             () => connection.loginFailed,
             (err) => {
                 if (connection.loginFailed) {
-                    toast.show("Error: " + err);
+                    toast.show('Error: ' + err);
                 }
             }
         );
 
     }
 
-    connect(host, port, password) {
+    connect (host, port, password) {
         this.connection.connect(host, port, password);
     }
 }
-ConnectController.$inject = ["$log", "$scope", "toast", "connection", "$state"];
+ConnectController.$inject = ['$log', '$scope', 'toast', 'connection', '$state'];
 
 export default ConnectController;

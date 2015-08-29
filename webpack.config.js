@@ -1,7 +1,7 @@
 /**
  * Webpack config for development
  */
-module.exports = require("./webpack.make")({
+module.exports = require('./webpack.make')({
   BUILD: false,
   TEST: false
 });

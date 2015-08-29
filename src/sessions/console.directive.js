@@ -1,43 +1,41 @@
-"use strict";
+import $ from 'jquery';
+require('../vendor/jqconsole');
 
-import $ from "jquery";
-require("../vendor/jqconsole");
-
-function ConsoleController($rootScope) {
+function ConsoleController ($rootScope) {
     var ctrl = this;
     // Handle non-login websocket responses, meaning, EvalResponse
     $rootScope.$on(
-        "EvalResponse",
+        'EvalResponse',
         (event, response) =>
-            ctrl.jqconsole["Write"](
-                response.replace("\r", ""), "jqconsole-output")
+            ctrl.jqconsole.Write(
+                response.replace('\r', ''), 'jqconsole-output')
     );
 }
-ConsoleController.$inject = ["$rootScope"];
+ConsoleController.$inject = ['$rootScope'];
 
-function ConsoleLink(scope, element, attr, ctrl) {
-    ctrl.jqconsole = $(element).find("#console").jqconsole("Hi\n", "\n>>>");
+function ConsoleLink (scope, element, attr, ctrl) {
+    ctrl.jqconsole = $(element).find('#console').jqconsole('Hi\n', '\n>>>');
     var startPrompt = function () {
         // Start the prompt with history enabled.
-        ctrl.jqconsole["Prompt"](true, function (input) {
+        ctrl.jqconsole.Prompt(true, function (input) {
             // Output input with the class jqconsole-output.
-            ctrl.jqconsole["Write"](input + "\n", "jqconsole-output");
+            ctrl.jqconsole.Write(input + '\n', 'jqconsole-output');
             // Restart the prompt.
             startPrompt();
         });
     };
     startPrompt();
 }
-ConsoleLink.$inject = ["scope", "element", "attr", "ctrl"];
+ConsoleLink.$inject = ['scope', 'element', 'attr', 'ctrl'];
 
-export default function Console() {
+export default function Console () {
     return {
-        restrict: "E",
+        restrict: 'E',
         scope: {},
         bindToController: {},
-        template: `<div id="console"></div>`,
+        template: `<div id='console'></div>`,
         controller: ConsoleController,
-        controllerAs: "ctrl",
+        controllerAs: 'ctrl',
         link: ConsoleLink
     };
 }

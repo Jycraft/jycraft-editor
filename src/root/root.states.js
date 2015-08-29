@@ -1,16 +1,14 @@
-"use strict";
+import RootController from './root.controller';
 
-import RootController from "./root.controller";
-
-function states($stateProvider) {
-    $stateProvider.state("root", {
+function states ($stateProvider) {
+    $stateProvider.state('root', {
             abstract: true,
-            template: require("./root.html"),
+            template: require('./root.html'),
             controller: RootController,
-            controllerAs: "ctrl"
+            controllerAs: 'ctrl'
         }
     );
 }
-states.$inject = ["$stateProvider"];
+states.$inject = ['$stateProvider'];
 
 export {states};

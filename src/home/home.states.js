@@ -1,17 +1,15 @@
-"use strict";
+import HomeController from './home.controller';
 
-import HomeController from "./home.controller";
-
-function states($stateProvider) {
+function states ($stateProvider) {
     $stateProvider
-        .state("home", {
-            parent: "root",
-            url: "/",
-            template: require("./home.html"),
+        .state('home', {
+            parent: 'root',
+            url: '/',
+            template: require('./home.html'),
             controller: HomeController,
-            controllerAs: "ctrl"
+            controllerAs: 'ctrl'
         });
 }
-states.$inject = ["$stateProvider"];
+states.$inject = ['$stateProvider'];
 
 export {states};

@@ -1,11 +1,9 @@
-"use strict";
+import { expect } from 'chai';
 
-import { expect } from "chai";
+import Toast from '../toast.service';
 
-import Toast from "../toast.service";
-
-describe("Toast", () => {
-    it("can be imported", () => {
-        expect(Toast).to.be.a("function");
+describe('Toast', () => {
+    it('can be imported', () => {
+        expect(Toast).to.be.a('function');
     });
 });

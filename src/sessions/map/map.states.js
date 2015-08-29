@@ -1,14 +1,14 @@
-function states($stateProvider) {
+function states ($stateProvider) {
     $stateProvider
 
-        .state("session.map", {
-            parent: "session",
-            url: "/map",
-            template: require("./session.map.html"),
+        .state('session.map', {
+            parent: 'session',
+            url: '/map',
+            template: require('./session.map.html'),
             controller: SessionMapController,
-            controllerAs: "ctrl"
+            controllerAs: 'ctrl'
         });
 }
-states.$inject = ["$stateProvider"];
+states.$inject = ['$stateProvider'];
 
 export {states};

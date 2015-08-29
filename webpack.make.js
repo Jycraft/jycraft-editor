@@ -1,13 +1,11 @@
-"use strict";
-
 // Modules
-var webpack = require("webpack");
-var autoprefixer = require("autoprefixer-core");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var CleanPlugin = require("clean-webpack-plugin");
+var webpack = require('webpack');
+var autoprefixer = require('autoprefixer-core');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CleanPlugin = require('clean-webpack-plugin');
 
-module.exports = function makeWebpackConfig(options) {
+module.exports = function makeWebpackConfig (options) {
     /**
      * Environment type
      * BUILD is for generating minified builds
@@ -26,41 +24,41 @@ module.exports = function makeWebpackConfig(options) {
     /**
      * Entry
      * Reference: http://webpack.github.io/docs/configuration.html#entry
-     * Should be an empty object if it"s generating a test build
-     * Karma will set this when it"s a test build
+     * Should be an empty object if it's generating a test build
+     * Karma will set this when it's a test build
      */
     if (TEST) {
         config.entry = {};
     } else {
         config.entry = {
-            app: "./src/app.js"
+            app: './src/app.js'
         };
     }
 
     /**
      * Output
      * Reference: http://webpack.github.io/docs/configuration.html#output
-     * Should be an empty object if it"s generating a test build
-     * Karma will handle setting it up for you when it"s a test build
+     * Should be an empty object if it's generating a test build
+     * Karma will handle setting it up for you when it's a test build
      */
     if (TEST) {
         config.output = {};
     } else {
         config.output = {
             // Absolute output directory
-            path: __dirname + "/output",
+            path: __dirname + '/output',
 
             // Output path from the view of the page
             // Uses webpack-dev-server in development
-            outputPath: BUILD ? "/" : "http://localhost:8080/",
+            outputPath: BUILD ? '/' : 'http://localhost:8080/',
 
             // Filename for entry points
             // Only adds hash in build mode
-            filename: BUILD ? "[name].[hash].js" : "[name].bundle.js",
+            filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
 
             // Filename for non-entry points
             // Only adds hash in build mode
-            chunkFilename: BUILD ? "[name].[hash].js" : "[name].bundle.js"
+            chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js'
         };
     }
 
@@ -70,11 +68,11 @@ module.exports = function makeWebpackConfig(options) {
      * Type of sourcemap to use per build type
      */
     if (TEST) {
-        config.devtool = "inline-source-map";
+        config.devtool = 'inline-source-map';
     } else if (BUILD) {
-        config.devtool = "source-map";
+        config.devtool = 'source-map';
     } else {
-        config.devtool = "eval";
+        config.devtool = 'eval';
     }
 
     /**
@@ -93,7 +91,7 @@ module.exports = function makeWebpackConfig(options) {
         preLoaders: [
             {
                 test: /\.js$/,
-                loader: "eslint-loader",
+                loader: 'eslint-loader',
                 exclude: [/node_modules/, /vendor/]
             }
         ],
@@ -104,7 +102,7 @@ module.exports = function makeWebpackConfig(options) {
                 // Transpile .js files using babel-loader
                 // Compiles ES6 and ES7 into ES5 code
                 test: /\.js$/,
-                loader: "babel?optional[]=runtime",
+                loader: 'babel?optional[]=runtime',
                 exclude: /node_modules/
             },
             {
@@ -115,14 +113,14 @@ module.exports = function makeWebpackConfig(options) {
                 // Pass along the updated reference to your code
                 // You can add here any file extension you want to get copied to your output
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                loader: "file"
+                loader: 'file'
             },
             {
                 // HTML LOADER
                 // Reference: https://github.com/webpack/raw-loader
                 // Allow loading html through js
                 test: /\.html$/,
-                loader: "raw"
+                loader: 'raw'
             }]
     };
 
@@ -137,7 +135,7 @@ module.exports = function makeWebpackConfig(options) {
                 /node_modules/,
                 /\.test\.js$/
             ],
-            loader: "isparta-instrumenter"
+            loader: 'isparta-instrumenter'
         });
     }
 
@@ -154,14 +152,14 @@ module.exports = function makeWebpackConfig(options) {
         //
         // Reference: https://github.com/webpack/style-loader
         // Use style-loader in development for hot-loading
-        loader: ExtractTextPlugin.extract("style", "css?sourceMap!postcss")
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss')
     };
 
     // Skip loading css in test mode
     if (TEST) {
         // Reference: https://github.com/webpack/null-loader
         // Return an empty module
-        cssLoader.loader = "null";
+        cssLoader.loader = 'null';
     }
 
     // Add cssLoader to the loader list
@@ -174,7 +172,7 @@ module.exports = function makeWebpackConfig(options) {
      */
     config.postcss = [
         autoprefixer({
-            browsers: ["last 2 version"]
+            browsers: ['last 2 version']
         })
     ];
 
@@ -187,10 +185,10 @@ module.exports = function makeWebpackConfig(options) {
         // Reference: https://github.com/webpack/extract-text-webpack-plugin
         // Extract css files
         // Disabled when in test mode or not in build mode
-        new ExtractTextPlugin("[name].[hash].css", {
+        new ExtractTextPlugin('[name].[hash].css', {
             disable: !BUILD || TEST
         }),
-        new CleanPlugin(["output"])
+        new CleanPlugin(['output'])
     ];
 
     // Skip rendering index.html in test mode
@@ -199,8 +197,8 @@ module.exports = function makeWebpackConfig(options) {
         // Render index.html
         config.plugins.push(
             new HtmlWebpackPlugin({
-                template: "./src/index.html",
-                inject: "body",
+                template: './src/index.html',
+                inject: 'body',
                 minify: BUILD
             })
         );
@@ -229,7 +227,7 @@ module.exports = function makeWebpackConfig(options) {
      * Reference: http://webpack.github.io/docs/webpack-dev-server.html
      */
     config.devServer = {
-        contentBase: "./output",
+        contentBase: './output',
         stats: {
             modules: false,
             cached: false,

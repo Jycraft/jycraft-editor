@@ -1,5 +1,3 @@
-"use strict";
-
 class Toast {
     constructor ($mdToast) {
         this.$mdToast = $mdToast;
@@ -9,6 +7,6 @@ class Toast {
         this.$mdToast.show(this.$mdToast.simple().content(message));
     }
 }
-Toast.$inject = ["$mdToast"];
+Toast.$inject = ['$mdToast'];
 
 export default Toast;

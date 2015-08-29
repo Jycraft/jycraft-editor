@@ -1,7 +1,5 @@
-"use strict";
-
 class Controller {
-    constructor() {
+    constructor () {
     }
 }
 Controller.$inject = [];

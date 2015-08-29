@@ -1,13 +1,11 @@
-"use strict";
+import { expect } from 'chai';
 
-import { expect } from "chai";
-
-import Controller from "../map.controller";
+import Controller from '../map.controller';
 
 
-describe("Maps Controller Setup", () => {
+describe('Maps Controller Setup', () => {
 
-    it("can be imported", () => {
-        expect(Controller).to.be.an("function");
+    it('can be imported', () => {
+        expect(Controller).to.be.an('function');
     });
 });

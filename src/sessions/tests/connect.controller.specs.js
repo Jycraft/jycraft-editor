@@ -1,10 +1,8 @@
-"use strict";
+import { expect } from 'chai';
 
-import { expect } from "chai";
+import ConnectController from '../connect.controller';
 
-import ConnectController from "../connect.controller";
-
-describe("ConnectController", () => {
+describe('ConnectController', () => {
 
     let $log, $scope, connection, toast, $state, ctrl;
 
@@ -20,8 +18,8 @@ describe("ConnectController", () => {
         ctrl = new ConnectController($log, $scope, toast, connection, $state);
     });
 
-    it("can be imported", () => {
-        expect(ConnectController).to.be.an("function");
+    it('can be imported', () => {
+        expect(ConnectController).to.be.an('function');
     });
 
 });

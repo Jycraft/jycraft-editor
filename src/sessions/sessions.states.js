@@ -1,39 +1,37 @@
-"use strict";
+import ConnectController from './connect.controller';
+import { SessionsController } from './sessions.controllers';
+import { SessionController } from './sessions.controllers';
 
-import ConnectController from "./connect.controller";
-import { SessionsController } from "./sessions.controllers";
-import { SessionController } from "./sessions.controllers";
-
-function states($stateProvider) {
+function states ($stateProvider) {
     $stateProvider
-        .state("connect", {
-            parent: "root",
-            url: "/connect",
-            template: require("./connect.html"),
+        .state('connect', {
+            parent: 'root',
+            url: '/connect',
+            template: require('./connect.html'),
             controller: ConnectController,
-            controllerAs: "ctrl"
+            controllerAs: 'ctrl'
         })
-        .state("sessions", {
-            parent: "root",
-            url: "/sessions",
-            template: "<ui-view></ui-view>"
+        .state('sessions', {
+            parent: 'root',
+            url: '/sessions',
+            template: '<ui-view></ui-view>'
         })
-        .state("sessions.list", {
-            parent: "sessions",
-            url: "/list",
-            template: require("./sessions.list.html"),
+        .state('sessions.list', {
+            parent: 'sessions',
+            url: '/list',
+            template: require('./sessions.list.html'),
             controller: SessionsController,
-            controllerAs: "ctrl"
+            controllerAs: 'ctrl'
         })
-        .state("session", {
-            parent: "sessions",
-            url: "/:id",
-            template: require("./session.html"),
+        .state('session', {
+            parent: 'sessions',
+            url: '/:id',
+            template: require('./session.html'),
             controller: SessionController,
-            controllerAs: "ctrl",
+            controllerAs: 'ctrl',
             resolve: SessionController.resolve
         });
 }
-states.$inject = ["$stateProvider"];
+states.$inject = ['$stateProvider'];
 
 export {states};

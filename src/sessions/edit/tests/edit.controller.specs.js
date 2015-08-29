@@ -1,13 +1,11 @@
-"use strict";
+import { expect } from 'chai';
 
-import { expect } from "chai";
-
-import Controller from "../edit.controller";
+import Controller from '../edit.controller';
 
 
-describe("Edit Controller Setup", () => {
+describe('Edit Controller Setup', () => {
 
-    it("can be imported", () => {
-        expect(Controller).to.be.an("function");
+    it('can be imported', () => {
+        expect(Controller).to.be.an('function');
     });
 });
