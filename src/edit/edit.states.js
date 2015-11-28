@@ -7,7 +7,8 @@ function states ($stateProvider) {
             url: '/edit',
             template: require('./edit.html'),
             controller: Controller,
-            controllerAs: 'ctrl'
+            controllerAs: 'ctrl',
+            resolve: Controller.resolve
         });
 }
 states.$inject = ['$stateProvider'];

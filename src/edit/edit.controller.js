@@ -3,6 +3,17 @@ from mcapi import yell
 yell('Howdy')`;
 
 class Controller {
+    static $inject = ['$log', '$rootScope', 'toast', 'connection'];
+    static resolve = {
+        isConnected: function (connection, $state, $mdToast) {
+            if (!connection.isConnected) {
+                let message = 'Not yet connected';
+                $mdToast.show($mdToast.simple().content(message));
+                $state.go('connect');
+            }
+        }
+    };
+
     constructor ($log, $rootScope, toast, connection) {
         this.$log = $log;
         this.$rootScope = $rootScope;
@@ -11,16 +22,17 @@ class Controller {
         this.codeSnippet = defaultSnippet;
 
         var aceLoaded = (_editor) => {
-            _editor.commands.addCommand({
-                name: 'Execute',
-                bindKey: {
-                    mac: 'Command-Shift-Up',
-                    win: 'Alt-Shift-Up'
-                },
-                exec: function () {
-                    this.run(this.snippet);
-                }
-            });
+            _editor.commands.addCommand(
+                {
+                    name: 'Execute',
+                    bindKey: {
+                        mac: 'Command-Shift-Up',
+                        win: 'Alt-Shift-Up'
+                    },
+                    exec: function () {
+                        this.run(this.codeSnippet);
+                    }
+                });
         };
 
         function aceChanged () {
@@ -43,6 +55,5 @@ class Controller {
         this.connection.send(this.codeSnippet);
     }
 }
-Controller.$inject = ['$log', '$rootScope', 'toast', 'connection'];
 
 export default Controller;
