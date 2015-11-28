@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
-import ConnectController from '../connect.controller';
+import ConnectionController from '../connection.controller';
 
-describe('ConnectController', () => {
+describe('ConnectionController', () => {
 
     let $log, $scope, connection, toast, $state, ctrl;
 
@@ -11,15 +11,15 @@ describe('ConnectController', () => {
             $watch: function () {
 
             }
-        }
+        };
     });
 
     beforeEach(() => {
-        ctrl = new ConnectController($log, $scope, toast, connection, $state);
+        ctrl = new ConnectionController($log, $scope, toast, connection, $state);
     });
 
     it('can be imported', () => {
-        expect(ConnectController).to.be.an('function');
+        expect(ConnectionController).to.be.an('function');
     });
 
 });

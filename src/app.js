@@ -7,11 +7,13 @@ import 'angular-material-icons';
 import themingConfig from './app.theming';
 import root from './root';
 import home from './home';
-import sessions from './sessions';
+import connection from './connection';
+import edit from './edit';
 
 angular.module('app', [ngMaterial, 'ngMdIcons',
     root,
     home,
-    sessions
+    connection,
+    edit
 ])
     .config(themingConfig);

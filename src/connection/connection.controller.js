@@ -1,4 +1,6 @@
-class ConnectController {
+class ConnectionController {
+    static $inject = ['$log', '$scope', 'toast', 'connection', '$state'];
+
     constructor ($log, $scope, toast, connection, $state) {
         this.host = 'localhost';
         this.port = 44445;
@@ -14,7 +16,7 @@ class ConnectController {
                 if (connection.isConnected) {
                     // Navigate away, we're connected
                     toast.show('You are connected');
-                    $state.go('sessions.list');
+                    $state.go('edit');
                 }
             }
         );
@@ -35,6 +37,5 @@ class ConnectController {
         this.connection.connect(host, port, password);
     }
 }
-ConnectController.$inject = ['$log', '$scope', 'toast', 'connection', '$state'];
 
-export default ConnectController;
+export default ConnectionController;
