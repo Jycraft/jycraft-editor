@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Jycraft/jycraft-codecraft.svg)](https://travis-ci.org/Jycraft/jycraft-codecraft)
+[![Build Status](https://travis-ci.org/Jycraft/jycraft-editor.svg?branch=master)](https://travis-ci.org/Jycraft/jycraft-editor)
 
 # jycraft-codecraft
 Web-based coding, sharing, and distribution environment for Jycraft
