@@ -5,13 +5,15 @@ yell('Howdy')`;
 class Controller {
     static $inject = ['$log', '$rootScope', 'toast', 'connection'];
     static resolve = {
-        isConnected: function (connection, $state, $mdToast) {
-            if (!connection.isConnected) {
-                let message = 'Not yet connected';
-                $mdToast.show($mdToast.simple().content(message));
-                $state.go('connect');
-            }
-        }
+        isConnected: [
+            'connection', '$state', '$mdToast',
+            function (connection, $state, $mdToast) {
+                if (!connection.isConnected) {
+                    let message = 'Not yet connected';
+                    $mdToast.show($mdToast.simple().content(message));
+                    $state.go('connect');
+                }
+            }]
     };
 
     constructor ($log, $rootScope, toast, connection) {
