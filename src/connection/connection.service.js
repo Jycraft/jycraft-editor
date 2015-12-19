@@ -40,33 +40,21 @@ class Connection {
     }
 
     interactiveHandler (msg) {
-        this.$log.debug('Execute', msg);
+        let response = msg.result;
+        this.$rootScope.$broadcast('EvalResponse', response);
+    }
+
+    sendPython (code) {
+        let msg = {type: 'interactive', command: code};
+        this.dataStream.send(JSON.stringify(msg));
     }
 
     onMessage (message) {
         // Dispatcher for different kinds of messages
         let msg = JSON.parse(message.data);
-        this.$log.debug('Incoming msg', msg);
         this[msg.type + 'Handler'](msg);
 
         return;
-
-
-        // Parse various kinds of responses
-        //if (response === `Login by sending 'login!<PASSWORD>'`) {
-        //    // This is the response on the first connection, do
-        //    // nothing
-        //    this.isConnected = false;
-        //} else if (response.startsWith('Incorrect password!')) {
-        //    this.toast.show('Incorrect password');
-        //} else if (response.startsWith('Not authorized, login first')) {
-        //    this.isConnected = false;
-        //    this.loginFailed = true;
-        //} else {
-        //    this.isConnected = true;
-        //    this.loginFailed = false;
-        //    this.$rootScope.$broadcast('EvalResponse', response);
-        //}
     }
 
     onClose (event) {
@@ -78,10 +66,6 @@ class Connection {
 
     }
 
-    send (msg) {
-        this.$log.debug('sending msg', msg);
-        this.dataStream.send(msg);
-    }
 }
 
 Connection.$inject = ['$log', '$rootScope', '$websocket', 'toast'];

@@ -54,8 +54,7 @@ class Controller {
         if (!this.connection.isConnected) {
             this.toast.show('Lost the connection');
         }
-        let msg = {type: 'interactive', command: 'print 1+1'};
-        this.connection.send(msg);
+        this.connection.sendPython(this.codeSnippet);
     }
 }
 
