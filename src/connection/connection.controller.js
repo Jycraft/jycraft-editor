@@ -24,9 +24,9 @@ class ConnectionController {
         // Handle connection error
         $scope.$watch(
             () => connection.loginFailed,
-            (err) => {
+            () => {
                 if (connection.loginFailed) {
-                    toast.show('Error: ' + err);
+                    toast.show('Login failed');
                 }
             }
         );
