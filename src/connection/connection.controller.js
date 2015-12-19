@@ -3,7 +3,7 @@ class ConnectionController {
 
     constructor ($log, $scope, toast, connection, $state) {
         this.host = 'localhost';
-        this.port = 44445;
+        this.port = 44446;
         this.password = 'swordfish';
         this.$log = $log;
         this.$state = $state;
